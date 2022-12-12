@@ -1,0 +1,25 @@
+.header {
+    background-color: #2D3748;
+    padding: 19px 46px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: white;
+}
+
+.btn {
+    background-color: #2D3748;
+    color: white;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
