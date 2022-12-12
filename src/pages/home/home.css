@@ -1,0 +1,66 @@
+.home {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.blue {
+    background-color: #4299E1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.blue:nth-child(2) {
+    border-bottom-right-radius: 40%;
+    border-bottom-left-radius: 40%;
+}
+
+.white {
+    color: white;
+    font-size: 100px;
+    line-height: 117px;
+}
+
+.cms {
+    color: #2D3748;
+    font-size: 100px;
+    line-height: 117px;
+}
+
+.text {
+    color: white;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 47px;
+}
+
+.find {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.input {
+    background: #EDF2F7;
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 300px;
+    margin-right: 10px;
+}
+
+.find_btn {
+    min-width: 70px;
+    padding: 10px;
+    background: #2A4365;
+    border-radius: 5px;
+    color: white;
+}
+
+.find_btn:hover {
+    cursor: pointer;
+    background-color: transparent;
+    color: black;
+}
