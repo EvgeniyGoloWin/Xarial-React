@@ -1,10 +1,13 @@
 import React from 'react';
 
 import "./home.css"
+import Header from "../../components/header/header";
 
 
 const Home = () => {
     return (
+        <>
+            <Header/>
         <div className={"home"}>
             <div className={"blue"}>
                 <p className={"white"}>Xarial</p>
@@ -18,6 +21,7 @@ const Home = () => {
                 <button className={"find_btn"}>Find</button>
             </div>
         </div>
+        </>
     );
 };
 
