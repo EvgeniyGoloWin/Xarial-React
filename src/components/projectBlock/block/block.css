@@ -1,0 +1,21 @@
+.block {
+    background-color: #E5E5E5;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    width: 100%;
+    margin: 10px;
+}
+
+.progress {
+    width: 300px;
+    border: 2px solid darkslategrey;
+    border-radius: 20px;
+}
+
+.bar {
+    background-color: #9AE6B4;;
+    height: 24px;
+    border-radius: 20px;
+}
