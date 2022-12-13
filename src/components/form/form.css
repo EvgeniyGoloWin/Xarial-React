@@ -1,13 +1,15 @@
-.form{
+.form {
     background-color: white;
     padding: 38px;
+    border-radius: 10px;
 }
 
 .form_group {
     display: flex;
     flex-direction: column;
 }
-.label{
+
+.label {
     margin: 10px 0;
 }
 
@@ -24,7 +26,8 @@
     color: rgba(49, 130, 206, 1);
     font-size: 20px;
 }
-.btn_forgot:hover{
+
+.btn_forgot:hover {
     cursor: pointer;
 }
 
