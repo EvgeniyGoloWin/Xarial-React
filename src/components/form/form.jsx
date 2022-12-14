@@ -42,7 +42,6 @@ const Form = () => {
         const formData = new FormData()
         formData.append('email', `${formState.email}`)
         formData.append('password', `${formState.password}`)
-        formData.append('role', "admin")
         const res = await fetch(`${baseUrl}/user/register`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             body: formData // body data type must match "Content-Type" header
