@@ -3,6 +3,7 @@ import React from 'react';
 import "./admin.css"
 import AdminBlock from "../../components/projectBlock/adminBlock/adminBlock";
 import Header from "../../components/header/header";
+import DragDrop from "../../components/drag&drop/drag&drop";
 
 const Admin = () => {
     const mock = [{
@@ -24,6 +25,7 @@ const Admin = () => {
                     return <AdminBlock key={`${index}`} item={item}/>
                 })}
             </div>
+            <DragDrop/>
         </>
     );
 };
