@@ -1,8 +1,9 @@
 import React, {useRef, useState} from 'react';
-
-import "./home.css"
 import Header from "../../components/header/header";
 import Block from "../../components/projectBlock/block/block";
+import {baseUrl} from "../../constants/api";
+
+import "./home.css"
 
 
 const Home = () => {
@@ -15,7 +16,7 @@ const Home = () => {
     const handleClick = async () => {
         let formData = new FormData()
         formData.append(`number`, `${find}`)
-        const res = await fetch(`http://localhost:8080/user/search`, {
+        const res = await fetch(`${baseUrl}/user/search`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             body: formData // body data type must match "Content-Type" header
         });
@@ -24,7 +25,8 @@ const Home = () => {
         setRes(data)
         setFind('')
     }
-    console.log(res)
+
+
     return (
         <>
             <Header/>
@@ -41,7 +43,8 @@ const Home = () => {
                            onChange={(event) => inputChange(event)}/>
                     <button className={"find_btn"} type={"submit"} onClick={handleClick}>Find</button>
                 </div>
-                {Object.keys(res).length === 0 ? null : Object.keys(res).length === 1 ? <p className={"error"}>{res?.message}</p> :
+                {Object.keys(res).length === 0 ? null : Object.keys(res).length === 1 ?
+                    <p className={"not_find"}>{res?.message}</p> :
                     <Block item={res}/>
                 }
             </div>
