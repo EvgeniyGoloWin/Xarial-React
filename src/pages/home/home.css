@@ -65,3 +65,9 @@
     background-color: transparent;
     color: black;
 }
+
+.not_find {
+    font-size: 24px;
+    color: red;
+    text-align: center;
+}
