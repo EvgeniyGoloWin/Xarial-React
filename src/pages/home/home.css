@@ -65,3 +65,9 @@
     background-color: transparent;
     color: black;
 }
+
+.error {
+    font-size: 24px;
+    color: red;
+    text-align: center;
+}
