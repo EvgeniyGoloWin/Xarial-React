@@ -7,15 +7,13 @@ import "./home.css"
 
 
 const Home = () => {
-    const [find, setFind] = useState('')
+    const inputRef = useRef('')
     const [res, setRes] = useState({})
 
-    const inputChange = (e) => {
-        setFind(e.target.value)
-    }
+
     const handleClick = async () => {
         let formData = new FormData()
-        formData.append(`number`, `${find}`)
+        formData.append(`number`, `${inputRef.current.value}`)
         const res = await fetch(`${baseUrl}/user/search`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             body: formData // body data type must match "Content-Type" header
@@ -23,7 +21,6 @@ const Home = () => {
 
         const data = await res.json()
         setRes(data)
-        setFind('')
     }
 
 
@@ -39,8 +36,7 @@ const Home = () => {
                     <p className={"text"}>Find information about your project</p>
                 </div>
                 <div className={"find"}>
-                    <input className={"input"} type="number" value={find}
-                           onChange={(event) => inputChange(event)}/>
+                    <input className={"input"} type="number" ref={inputRef}/>
                     <button className={"find_btn"} type={"submit"} onClick={handleClick}>Find</button>
                 </div>
                 {Object.keys(res).length === 0 ? null : Object.keys(res).length === 1 ?
