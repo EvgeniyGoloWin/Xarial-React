@@ -7,7 +7,7 @@ import "./home.css"
 
 
 const Home = () => {
-    const inputRef = useRef('')
+    const inputRef = useRef("")
     const [res, setRes] = useState({})
 
 
