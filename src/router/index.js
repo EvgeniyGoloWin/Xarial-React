@@ -5,6 +5,7 @@ import {ErrorPage} from "../pages/error/error";
 import Login from "../pages/login/login";
 import Registration from "../pages/registration/registration";
 import Admin from "../pages/admin/admin";
+import Contract from "../pages/contract/contract";
 
 
 export const router = createBrowserRouter([
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
         {
             path: "*",
             element: <ErrorPage/>,
+        },
+        {
+           path: "/admin/contract/:name",
+           element: <Contract/>
         },
     ]
 )

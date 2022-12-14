@@ -14,8 +14,8 @@
 }
 
 .drop-area {
-    width: 40vw;
-    height: 40vh;
+    width: 20vw;
+    height: 20vh;
     border: 5px dashed rgba(49, 130, 206, 1);
     display: flex;
     justify-content: center;
@@ -33,4 +33,9 @@
 
 button {
     display: flex;
+}
+
+.image_drag {
+    width: 45px;
+    height: 45px;
 }

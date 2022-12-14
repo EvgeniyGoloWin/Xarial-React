@@ -1,8 +1,12 @@
 import React from 'react';
 
 import "./adminBlock.css"
+import {useNavigate} from "react-router";
+import {useLocation} from "react-router-dom";
 
 const AdminBlock = ({item}) => {
+    const navigate = useNavigate();
+    const openItem = (name) => navigate(`/admin/contract/${name}`)
 
     const getProgress = (status) => {
         switch (status) {
@@ -15,7 +19,6 @@ const AdminBlock = ({item}) => {
         }
     }
 
-
     console.log(item)
     return (
         <div className={"adminBlock"}>
@@ -26,7 +29,7 @@ const AdminBlock = ({item}) => {
             <div className="progress">
                 <div className="bar" style={{width: `${getProgress(item.status)}%`}}/>
             </div>
-            <button className={"btn"}>Save</button>
+            <button onClick={() => openItem(item.name)} className={"btn"}>Edit</button>
         </div>
     );
 };

@@ -1,4 +1,5 @@
 import React, {useRef, useState} from 'react';
+import dragAndDrop from '../../assets/icons/drag.png'
 
 import './drag&drop.css'
 import form from "../form/form";
@@ -41,14 +42,9 @@ const DragDrop = () => {
                     onDragLeave={e => dragLeaveHandler(e)}
                     onDragOver={e => dragStartHandler(e)}
                     onDrop={e => onDropHandler(e)}
-                >{drag ? 'Transfer your files' : 'Drag&Drop or click here'}</div>
-                {/*// : <div*/}
-                {/*//     onDragStart={e => dragStartHandler(e)}*/}
-                {/*//     onDragLeave={e => dragLeaveHandler(e)}*/}
-                {/*//     onDragOver={e => dragStartHandler(e)}*/}
-                {/*// >Transfer your file</div>  }*/}
+                >{drag ? 'Transfer your files' : 'Drag&Drop or click here'}
+                     <img className='image_drag' src={dragAndDrop} alt='upload file'/></div>
             <input className='inputFile' type='file' id='file' multiple ref={inputFile}/>
-            {/*<button >Open file upload window</button>*/}
           </div>
     );
 };
