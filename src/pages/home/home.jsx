@@ -7,9 +7,8 @@ import "./home.css"
 
 
 const Home = () => {
-    const inputRef = useRef("")
+    const inputRef = useRef(null)
     const [res, setRes] = useState({})
-
 
     const handleClick = async () => {
         let formData = new FormData()
