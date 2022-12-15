@@ -34,7 +34,7 @@ const Form = () => {
         sessionStorage.setItem(token, data.token)
         sessionStorage.setItem(role, data.role)
         dispatch(setUser(data))
-        navigate('/admin')
+        data.role === "user" ? navigate( "/user" ) : navigate("/admin")
     }
 
     const handleSubmitRegister = async (e) => {
