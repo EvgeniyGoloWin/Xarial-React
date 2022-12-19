@@ -4,6 +4,7 @@ import Header from "../../components/header/header";
 // import {baseUrl} from "../../constants/api";
 
 import "./user.css"
+import {token} from "../../constants/storageKey";
 
 
 const User = () => {
@@ -13,6 +14,7 @@ const User = () => {
         status: "Request Received",
         docs: []
     }
+    const isAuth = sessionStorage.getItem(token)
 
 
     const getProgress = (status) => {
@@ -51,6 +53,10 @@ const User = () => {
                 <div className="progress">
                     <div className="bar" style={{width: `${getProgress(item.status)}%`}}/>
                 </div>
+
+                isAuth && <div>
+                ?
+            </div>
 
             </div>
         </>
