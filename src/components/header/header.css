@@ -5,6 +5,9 @@
     align-items: center;
     justify-content: space-between;
 }
+.goHome:hover{
+    cursor: pointer;
+}
 
 .logo {
     color: white;

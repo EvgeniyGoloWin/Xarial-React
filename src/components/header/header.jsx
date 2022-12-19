@@ -1,27 +1,30 @@
 import React from 'react';
-
-import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import {token} from "../../constants/storageKey";
+
 import "./header.css"
 
 
 const Header = () => {
     const navigate = useNavigate()
 
-    // const {auth} = useSelector((state) => state.user)
-    const auth = false
+    const auth = sessionStorage.getItem(token)
 
 
     const logOut = () => {
-
+        sessionStorage.clear()
+        navigate('/')
     }
     const singIn = () => {
         navigate('/login')
     }
+    const goHome = () =>{
+        navigate('/')
+    }
     return (
         <header className={"header"}>
             <div className={"logo"}>
-                <p>Xarial CMS</p>
+                <p className={"goHome"} onClick={goHome}>Xarial CMS</p>
             </div>
             <div>
                 {auth ? <button onClick={logOut} className={"btn"}>Log out</button> :

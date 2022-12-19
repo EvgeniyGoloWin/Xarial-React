@@ -5,7 +5,6 @@ import {ErrorPage} from "../pages/error/error";
 import Login from "../pages/login/login";
 import Registration from "../pages/registration/registration";
 import Admin from "../pages/admin/admin";
-import PrivateRoutes from "../components/privateRoutes/privateRoutes";
 import PrivateRoutesAdmin from "../components/privateRoutesAdmin/privateRoutesAdmin";
 import User from "../pages/user/user";
 
@@ -33,7 +32,7 @@ export const router = createBrowserRouter([
         },
         {
             path: "/user",
-            element: <PrivateRoutes><User/></PrivateRoutes>
+            element: <User/>
         },
         {
             path: "*",
