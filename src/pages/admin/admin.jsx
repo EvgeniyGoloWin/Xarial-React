@@ -1,27 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import AdminBlock from "../../components/projectBlock/adminBlock/adminBlock";
 import Header from "../../components/header/header";
 
 import "./admin.css"
+import {baseUrl} from "../../constants/api";
 
 
 const Admin = () => {
-    const mock = [{
-        name: "name",
-        status: "status",
-    }, {
-        name: "name2",
-        status: "rejected",
-    }, {
-        name: "name3",
-        status: "fulfilled",
-    }]
+
+    const [projects,setProjects] = useState()
+    console.log(projects)
+
+    useEffect(() => {
+        fetch(`${baseUrl}/docs`)
+            .then(res => res.json())
+            .then((res)=> {
+                setProjects(res)
+            })
+    }, [])
+
     return (
         <>
             <Header/>
             <div className={"admin"}>
                 <h1 className={"h1"}>Projects</h1>
-                {mock.map((item, index) => {
+                {projects?.map((item, index) => {
                     return <AdminBlock key={`${index}`} item={item}/>
                 })}
             </div>

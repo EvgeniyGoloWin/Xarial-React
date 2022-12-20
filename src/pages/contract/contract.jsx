@@ -1,26 +1,36 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from "../../components/header/header";
 import DragDrop from "../../components/drag&drop/drag&drop";
 
 
 import './contract.css'
+import {baseUrl} from "../../constants/api";
 
 const Contract = () => {
-    const getProgress = (status) => {
-        switch (status) {
-            case "pending":
-                return 10;
-            case "rejected":
-                return 35;
-            case "fulfilled":
-                return 100;
-        }
-    }
 
-    const mock = [{
-        name: "name",
-        status: "status",
-    }]
+    const [status,setStatus] = useState(null)
+    const [changeStatus,setChangeStatus] = useState(true)
+
+
+    console.log(status)
+
+    useEffect(() => {
+        fetch(`${baseUrl}/status`)
+            .then(res => res.json())
+            .then((res)=> {
+                setStatus(res)
+            })
+    }, [])
+
+    console.log(changeStatus)
+
+    useEffect(() => {
+        fetch(`${baseUrl}//admin/changeStatus`)
+            .then(res => res.json())
+            .then((res)=> {
+                setChangeStatus(res)
+            })
+    }, [])
 
     return (
         <>
@@ -33,15 +43,13 @@ const Contract = () => {
                     <div>
                         {/*<label className={"label_contract"}>Status</label>*/}
                         <select className={"input"}>
-                            <option>
-                            <p>One</p>
-                            </option>
-                            <option>
-                                <p>Two</p>
-                            </option>
-                            <option>
-                                <p>There</p>
-                            </option>
+                            {status?.map(item => (
+                                <>
+                                <option key={item}>
+                                    {item}
+                                </option>
+                                </>
+                            ))}
                         </select>
                     </div>
                         <DragDrop/>
