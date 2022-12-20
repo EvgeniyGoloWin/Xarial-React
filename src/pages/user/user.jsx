@@ -1,19 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Header from "../../components/header/header";
-
-// import {baseUrl} from "../../constants/api";
+import {token} from "../../constants/storageKey";
+import {useSelector} from "react-redux";
 
 import "./user.css"
-import {token} from "../../constants/storageKey";
 
 
 const User = () => {
+    const {project} = useSelector((state) => state.project)
+    console.log(project)
 
-    const item = {
-        name: "1287",
-        status: "Request Received",
-        docs: []
-    }
     const isAuth = sessionStorage.getItem(token)
 
 
@@ -35,9 +31,7 @@ const User = () => {
                 return 0
         }
     }
-    useEffect(() => {
-        // const res = fetch(`${baseUrl}/doc`)
-    }, [])
+
 
     return (
         <>
@@ -45,18 +39,18 @@ const User = () => {
             <div className={"user"}>
 
                 <p>
-                    Your project number is : {item.name}
+                    Your project number is : {project.name}
                 </p>
                 <p>
-                    Your project status {item.status}
+                    Your project status {project.status}
                 </p>
-                <div className="progress">
-                    <div className="bar" style={{width: `${getProgress(item.status)}%`}}/>
-                </div>
+                {/*<div className="progress">*/}
+                {/*    <div className="bar" style={{width: `${getProgress(project.status)}%`}}/>*/}
+                {/*</div>*/}
 
-                isAuth && <div>
-                ?
-            </div>
+                {isAuth && <div>
+                    {project?.docs}
+                </div>}
 
             </div>
         </>
