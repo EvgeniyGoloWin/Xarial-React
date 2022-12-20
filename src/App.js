@@ -1,6 +1,5 @@
 import {RouterProvider} from "react-router-dom";
 import {router} from "./router";
-import Header from "./components/header/header";
 
 import './App.css';
 

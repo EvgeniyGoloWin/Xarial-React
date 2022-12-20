@@ -3,13 +3,15 @@ import {
     Navigate,
     Outlet,
 } from 'react-router-dom';
-import {useSelector} from "react-redux";
+
+import {role, token} from "../../constants/storageKey";
+
 
 const PrivateRoutes = ({children}) => {
-    const {auth} = useSelector((state) => state.user)
+    const isAuth = sessionStorage.getItem(token)
 
-    if (!auth) {
-        return <Navigate to={'/login'} replace/>;
+    if (!isAuth) {
+        return <Navigate to={'/login'}/>;
     }
 
     return children ? children : <Outlet/>;
