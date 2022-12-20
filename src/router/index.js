@@ -6,7 +6,7 @@ import Login from "../pages/login/login";
 import Registration from "../pages/registration/registration";
 import Admin from "../pages/admin/admin";
 import PrivateRoutesAdmin from "../components/privateRoutesAdmin/privateRoutesAdmin";
-import User from "../pages/user/user";
+import Project from "../pages/project/project";
 import Contract from "../pages/contract/contract";
 
 
@@ -32,8 +32,8 @@ export const router = createBrowserRouter([
             element: <PrivateRoutesAdmin><Admin/></PrivateRoutesAdmin>
         },
         {
-            path: "/user",
-            element: <User/>
+            path: "/project/:number",
+            element: <Project/>
         },
         {
             path: "*",
