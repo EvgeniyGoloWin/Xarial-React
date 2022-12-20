@@ -39,7 +39,7 @@ const User = () => {
             <div className={"user"}>
 
                 <p>
-                    Your project number is : {project.name}
+                    Your project number is : {project.project_number}
                 </p>
                 <p>
                     Your project status {project.status}
@@ -48,7 +48,7 @@ const User = () => {
                 {/*    <div className="bar" style={{width: `${getProgress(project.status)}%`}}/>*/}
                 {/*</div>*/}
 
-                {isAuth && <div>
+                {isAuth ? <p>Sorry, but you can't attach files until you log in</p> : <div>
                     {project?.docs}
                 </div>}
 

@@ -32,7 +32,7 @@ const Block = ({item}) => {
     return (
         <div>
             <div className={"block"} onClick={handeClick}>
-                <p>{item.name}</p>
+                <p>{item.project_number}</p>
                 <p>{item.status}</p>
                 <div className="progress">
                     <div className="bar" style={{width: `${getProgress(item.status)}%`}}/>
