@@ -5,8 +5,7 @@
 }
 
 .dragNdrop {
-    width: 100vw;
-    height: 50vh;
+    height: 25vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,6 +24,7 @@
     font-size: 18px;
     line-height: 21px;
     color: #2A4365;
+    max-width: 300px;
 }
 
 .inputFile {
@@ -38,4 +38,16 @@ button {
 .image_drag {
     width: 45px;
     height: 45px;
+}
+
+.img_upload {
+    width: 150px;
+    height: 75px;
+}
+
+.img_remove {
+    color: red;
+    display: flex;
+    flex-direction: row-reverse;
+    border: none;
 }

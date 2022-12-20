@@ -1,8 +1,8 @@
 import React from 'react';
+import {useNavigate} from "react-router";
+
 
 import "./adminBlock.css"
-import {useNavigate} from "react-router";
-import {useLocation} from "react-router-dom";
 
 const AdminBlock = ({item}) => {
     const navigate = useNavigate();
@@ -23,9 +23,7 @@ const AdminBlock = ({item}) => {
     return (
         <div className={"adminBlock"}>
             <p>{item.name}</p>
-            <select>
-                <option>{item.status}</option>
-            </select>
+                <p>{item.status}</p>
             <div className="progress">
                 <div className="bar" style={{width: `${getProgress(item.status)}%`}}/>
             </div>
