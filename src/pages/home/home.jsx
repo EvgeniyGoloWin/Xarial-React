@@ -1,12 +1,16 @@
 import React, {useRef, useState} from 'react';
+import {useDispatch} from "react-redux";
 import Header from "../../components/header/header";
 import Block from "../../components/projectBlock/block/block";
 import {baseUrl} from "../../constants/api";
 
+
 import "./home.css"
+import {getProject} from "../../store/slice/projectSliceSlice";
 
 
 const Home = () => {
+    const dispatch = useDispatch()
     const inputRef = useRef(null)
     const [res, setRes] = useState({})
 
@@ -14,13 +18,16 @@ const Home = () => {
         let formData = new FormData()
         formData.append(`number`, `${inputRef.current.value}`)
         const res = await fetch(`${baseUrl}/user/search`, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            body: formData // body data type must match "Content-Type" header
+            method: 'POST',
+            body: formData
         });
 
         const data = await res.json()
         setRes(data)
+        dispatch(getProject(data))
+
     }
+    console.log(res)
 
 
     return (
