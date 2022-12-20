@@ -1,0 +1,53 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.dragNdrop {
+    height: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.drop-area {
+    width: 20vw;
+    height: 20vh;
+    border: 5px dashed rgba(49, 130, 206, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F7FAFC;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+    color: #2A4365;
+    max-width: 300px;
+}
+
+.inputFile {
+    display: none;
+}
+
+button {
+    display: flex;
+}
+
+.image_drag {
+    width: 45px;
+    height: 45px;
+}
+
+.img_upload {
+    width: 150px;
+    height: 75px;
+}
+
+.img_remove {
+    color: red;
+    display: flex;
+    flex-direction: row-reverse;
+    border: none;
+}
