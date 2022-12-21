@@ -12,7 +12,6 @@ const Contract = () => {
     const {number} = useParams()
     const [status, setStatus] = useState(null)
     const [loading, setLoading] = useState(false)
-    // const [changeStatus,setChangeStatus] = useState(true)
     const [project, setProject] = useState({})
     const [deletedFiles, setDeletedFiles] = useState([])
     console.log(deletedFiles)
@@ -38,14 +37,6 @@ const Contract = () => {
     }, [number])
 
 
-    // useEffect(() => {
-    //     fetch(`${baseUrl}/`)
-    //         .then(res => res.json())
-    //         .then((res)=> {
-    //             setChangeStatus(res)
-    //         })
-    // }, [])
-
     const onDropHandler = async (e) => {
         e.preventDefault()
         setProject({...project, docs: [...e.dataTransfer.files]})
@@ -59,13 +50,14 @@ const Contract = () => {
         console.log(e.target.files)
         setProject({...project, docs: [...e.target.files]})
     }
-    const removeFile = (name) => {
-        const arr = []
-        arr.push(name)
-        setDeletedFiles(arr)
-        const test = project.docs.filter((item) => item !== name)
-        console.log(test)
-        setProject({...project, docs: test})
+    const removeUploadedFile = (name) => {
+        const arr = project.docs.filter((item) => item !== name)
+        setProject({...project, docs: arr})
+        setDeletedFiles(prev=>[...deletedFiles,name])
+    }
+    const removeFile = (file) => {
+        const arr = project.docs.filter((item) => item.name !== file.name)
+        setProject({...project, docs: arr})
     }
     const onHandleSubmit = async (event) => {
         event.preventDefault()
@@ -80,15 +72,16 @@ const Contract = () => {
                 method: "PUT",
                 body: formData
             })
-        const updatedProject = res.json()
+        const updatedProject = await res.json()
 
-        // if (deletedFiles.length !== 0) {
-        //     await fetch(`http://localhost:8080/admin/project/${number}`,
-        //         {
-        //             method: "DELETE",
-        //             body: JSON.parse(deletedFiles)
-        //         })
-        // }
+        if (deletedFiles.length !== 0) {
+            await fetch(`http://localhost:8080/admin/project/${number}`,
+                {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(deletedFiles)
+                })
+        }
         setProject(updatedProject)
     }
 
@@ -130,7 +123,7 @@ const Contract = () => {
                                         ${index}</a> :
                                     <p className={"name"}>{item.name}</p>}
                                 <button className="remove" type={"button"}
-                                        onClick={() => removeFile(typeof item === 'string' ? item : item.name)}>X
+                                        onClick={() => typeof item === 'string' ? removeUploadedFile(item) : removeFile(item)}>X
                                 </button>
                             </div>
                         })
