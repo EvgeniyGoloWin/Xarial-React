@@ -38,8 +38,6 @@ const Project = () => {
                 {isAuth ? <div>
                     {project?.docs}
                 </div> : <p className={"project"}>Sorry, but you can't see attach files until you log in</p>}
-
-
             </div>}
         </>
     );
