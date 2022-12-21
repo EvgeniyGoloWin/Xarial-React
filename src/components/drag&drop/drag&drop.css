@@ -31,9 +31,6 @@
     display: none;
 }
 
-button {
-    display: flex;
-}
 
 .image_drag {
     width: 45px;
