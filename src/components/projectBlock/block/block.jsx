@@ -25,13 +25,13 @@ const Block = ({item}) => {
                 return 0
         }
     }
-    const handeClick = () => {
-        navigate("/user")
+    const handeClick = (number) => {
+        navigate(`/project/${number}`)
     }
 
     return (
         <div>
-            <div className={"block"} onClick={handeClick}>
+            <div className={"block"} onClick={() => handeClick(item.project_number)}>
                 <p>{item.project_number}</p>
                 <p>{item.status}</p>
                 <div className="progress">

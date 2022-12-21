@@ -24,10 +24,10 @@ const Home = () => {
 
         const data = await res.json()
         setRes(data)
-        dispatch(getProject(data))
+        // dispatch(getProject(data))
 
     }
-    console.log(res)
+
 
 
     return (
