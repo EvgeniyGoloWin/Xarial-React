@@ -15,7 +15,6 @@ const DragDrop = () => {
     };
 
     useEffect(() => {
-        //fake fetch data
         setFile(file);
     }, []);
 
@@ -49,6 +48,7 @@ const DragDrop = () => {
     }
 
     const onButtonClick = async (e) => {
+        console.log(e)
         inputFile.current.click()
         // let files = e.dataTransfer.files
         console.log(inputFile.current.files)
