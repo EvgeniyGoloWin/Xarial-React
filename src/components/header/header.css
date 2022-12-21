@@ -26,3 +26,9 @@
     color: black;
     cursor: pointer;
 }
+
+@media (max-width: 475px) {
+    .header {
+        padding: 19px 16px;
+    }
+}

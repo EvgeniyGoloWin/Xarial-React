@@ -30,3 +30,12 @@
     color: #2D3748;
     padding: 10px;
 }
+
+@media (max-width: 475px) {
+    .project {
+        width: calc(100% - 32px);
+        font-size: 18px;
+        padding: 5px 16px;
+        text-align: left;
+    }
+}

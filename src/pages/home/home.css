@@ -34,6 +34,7 @@
     font-weight: 400;
     font-size: 40px;
     line-height: 47px;
+    text-align: center;
 }
 
 .find {
@@ -70,4 +71,24 @@
     font-size: 24px;
     color: red;
     text-align: center;
+}
+
+@media (max-width: 475px) {
+    .white, .cms {
+        font-size: 50px;
+        line-height: 50px;
+    }
+
+    .blue {
+        min-height: 100px;
+    }
+
+    .text {
+        font-size: 25px;
+        line-height: 27px;
+    }
+
+    .input {
+        min-width: calc(100% - 30px);
+    }
 }

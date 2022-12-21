@@ -22,3 +22,22 @@
     height: 24px;
     border-radius: 20px;
 }
+
+@media (max-width: 475px) {
+    .block {
+        flex-wrap: wrap;
+    }
+
+    .block p {
+        flex: 1;
+    }
+
+    .block p:last-of-type {
+        text-align: right;
+    }
+
+    .block .progress {
+        margin-top: 8px;
+        min-width: 280px;
+    }
+}

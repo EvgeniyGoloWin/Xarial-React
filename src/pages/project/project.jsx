@@ -29,15 +29,15 @@ const Project = () => {
             {loading ? <p className={"loader"}>Data is loading...</p> : <div className={"user"}>
 
                 <p className={"project"}>
-                    Your project number is : {project?.project_number}
+                    <b>Your project number is</b> : {project?.project_number}
                 </p>
                 <p className={"project"}>
-                    Your project status : {project?.status}
+                    <b>Your project status</b> : {project?.status}
                 </p>
 
-                {isAuth ? <div>
+               <div>
                     {project?.docs}
-                </div> : <p className={"project"}>Sorry, but you can't see attach files until you log in</p>}
+               </div>
             </div>}
         </>
     );
