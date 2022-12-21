@@ -83,7 +83,6 @@ const Contract = () => {
         // setFile(url)
     }
 
-
     return (
         <>
             <Header/>
@@ -99,11 +98,9 @@ const Contract = () => {
                                 <option key={`${index}`} value={item}>
                                     {item}
                                 </option>
-
                             ))}
                         </select>
                     </div>
-
 
                     <div className='dragNDrop'>
                         <div
@@ -117,18 +114,15 @@ const Contract = () => {
                     </div>
                     {Object.keys(project).length &&
                         Array.from(project?.docs).map((item, index) => {
-                            return <div key={index}><p>{item.name}</p>
-                                <div className="img_remove">
+                            return <div className="show_upload_files" key={index}><p>{item.name}</p>
                                     <button className="img_remove">X</button>
                                 </div>
-                            </div>
                         })
                     }
 
                     <button className='btn' type="submit">Save</button>
                 </form>
             </div>}
-
         </>
     );
 };

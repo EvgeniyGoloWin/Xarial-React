@@ -82,14 +82,17 @@
     height: 45px;
 }
 
-.img_upload {
-    width: 150px;
-    height: 75px;
+/*.img_upload {*/
+/*    width: 150px;*/
+/*    height: 75px;*/
+/*}*/
+
+.show_upload_files {
+    display: flex;
+    margin-bottom: 5px;
 }
 
 .img_remove {
     color: red;
-    display: flex;
-    flex-direction: row-reverse;
     border: none;
 }
