@@ -40,8 +40,8 @@ export const router = createBrowserRouter([
             element: <ErrorPage/>,
         },
         {
-           path: "/admin/contract/:name",
-           element: <Contract/>
+            path: "/admin/contract/:number",
+            element: <Contract/>
         },
     ]
 )

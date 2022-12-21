@@ -12,8 +12,8 @@ const AdminBlock = ({item}) => {
     return (
         <div className={"adminBlock"}>
             <p>{item.project_number}</p>
-                <p>{item.status}</p>
-            <button onClick={() => openItem(item.name)} className={"btn"}>Edit</button>
+            <p>{item.status}</p>
+            <button onClick={() => openItem(item.project_number)} className={"btn"}>Edit</button>
         </div>
     );
 };

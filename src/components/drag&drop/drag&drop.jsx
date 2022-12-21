@@ -8,7 +8,7 @@ const DragDrop = () => {
         const [drag,setDrag] = useState(false)
         const [file,setFile] = useState([])
         const inputFile = useRef(null)
-    console.log(file)
+
 
     const removeImage = (id) => {
         setFile((file) => file.filter((item) => item.id !== id));
