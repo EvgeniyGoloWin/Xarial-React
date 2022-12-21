@@ -89,10 +89,31 @@
 
 .show_upload_files {
     display: flex;
+    max-width: 300px;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 5px;
 }
 
-.img_remove {
+.remove {
     color: red;
     border: none;
+    border-radius: 10px;
+}
+
+.name {
+    width: 100%;
+    font-size: 24px;
+}
+
+.remove:hover {
+    cursor: pointer;
+}
+
+.doc {
+    text-decoration: none;
+}
+
+.doc:hover {
+    cursor: pointer;
 }

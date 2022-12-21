@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../components/header/header";
-import DragDrop from "../../components/drag&drop/drag&drop";
-
-
-import './contract.css'
 import {baseUrl} from "../../constants/api";
 import {useParams} from "react-router";
 import dragAndDrop from "../../assets/icons/drag.png";
+
+
+import './contract.css'
+
 
 const Contract = () => {
     const {number} = useParams()
@@ -14,7 +14,8 @@ const Contract = () => {
     const [loading, setLoading] = useState(false)
     // const [changeStatus,setChangeStatus] = useState(true)
     const [project, setProject] = useState({})
-
+    const [deletedFiles, setDeletedFiles] = useState([])
+    console.log(deletedFiles)
     console.log(project)
 
     useEffect(() => {
@@ -34,7 +35,7 @@ const Contract = () => {
         setTimeout(() => {
             setLoading(false)
         }, 2000)
-    }, [])
+    }, [number])
 
 
     // useEffect(() => {
@@ -45,54 +46,62 @@ const Contract = () => {
     //         })
     // }, [])
 
-    async function onDropHandler(e) {
+    const onDropHandler = async (e) => {
         e.preventDefault()
-        // let files = e.dataTransfer.files
-        setProject({...project, docs: e.dataTransfer.files})
-        // setFile()
-        // const formData = new FormData()
-        // await files.forEach((item) => {
-        //     formData.append(`${item.name}`, item)
-        // })
-        // axios.post('url',formData,options)
-        // const res = await fetch(`http://localhost:8080/admin/upload/1287`, {
-        //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        //     body: formData // body data type must match "Content-Type" header
-        // });
-        // const url = await res.json()
+        setProject({...project, docs: [...e.dataTransfer.files]})
 
+    }
+    const changeSelectValue = (e) => {
+        setProject({...project, status: e.target.value})
     }
 
     const onChangeFiles = async (e) => {
         console.log(e.target.files)
-        setProject({...project, docs: e.target.files})
-        // let files = e.dataTransfer.files
+        setProject({...project, docs: [...e.target.files]})
+    }
+    const removeFile = (name) => {
+        const arr = []
+        arr.push(name)
+        setDeletedFiles(arr)
+        const test = project.docs.filter((item) => item !== name)
+        console.log(test)
+        setProject({...project, docs: test})
+    }
+    const onHandleSubmit = async (event) => {
+        event.preventDefault()
+        const formData = new FormData()
+        await project.docs.forEach((item) => {
+            formData.append(`${item.name}`, item)
+        })
+        formData.append(`status`, project.status)
 
+        const res = await fetch(`http://localhost:8080/admin/project/${number}`,
+            {
+                method: "PUT",
+                body: formData
+            })
+        const updatedProject = res.json()
 
-        // setFile()
-        // const formData = new FormData()
-        // await files.forEach((item)=> {
-        //     formData.append(`${item.name}`, item)
-        // })
-        // // axios.post('url',formData,options)
-        // const res = await fetch(`http://localhost:8080/admin/upload/1287`, {
-        //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        //     body: formData // body data type must match "Content-Type" header
-        // });
-        // const url = await res.json()
-        // setFile(url)
+        // if (deletedFiles.length !== 0) {
+        //     await fetch(`http://localhost:8080/admin/project/${number}`,
+        //         {
+        //             method: "DELETE",
+        //             body: JSON.parse(deletedFiles)
+        //         })
+        // }
+        setProject(updatedProject)
     }
 
     return (
         <>
             <Header/>
             {loading ? <p>Data is loading</p> : <div className="wrapper_contract">
-                <form className={"form_contract"}>
+                <form className={"form_contract"} onSubmit={(e) => onHandleSubmit(e)}>
                     <label className={"label_contract"}>
                         <p>Project number is: {project?.project_number}</p>
                     </label>
                     <div>
-                        <select className={"select"}>
+                        <select className={"select"} onChange={(e) => changeSelectValue(e)}>
                             <option value={project?.status}>{project?.status}</option>
                             {status?.filter((status) => status !== project.status).map((item, index) => (
                                 <option key={`${index}`} value={item}>
@@ -114,9 +123,16 @@ const Contract = () => {
                     </div>
                     {Object.keys(project).length &&
                         Array.from(project?.docs).map((item, index) => {
-                            return <div className="show_upload_files" key={index}><p>{item.name}</p>
-                                    <button className="img_remove">X</button>
-                                </div>
+                            return <div className="show_upload_files" key={index}>
+                                {typeof item === 'string' ?
+                                    <a className={"doc"} href={`http://localhost:8080/${item}`} target="_blank"
+                                       rel="noreferrer">doc
+                                        ${index}</a> :
+                                    <p className={"name"}>{item.name}</p>}
+                                <button className="remove" type={"button"}
+                                        onClick={() => removeFile(typeof item === 'string' ? item : item.name)}>X
+                                </button>
+                            </div>
                         })
                     }
 
