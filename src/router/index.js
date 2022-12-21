@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createHashRouter} from "react-router-dom";
 import Home from "../pages/home/home";
 import About from "../pages/about";
 import {ErrorPage} from "../pages/error/error";
@@ -10,7 +10,7 @@ import Project from "../pages/project/project";
 import Contract from "../pages/contract/contract";
 
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
         {
             path: "/",
             element: <Home/>,
