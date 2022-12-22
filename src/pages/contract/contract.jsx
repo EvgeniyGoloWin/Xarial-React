@@ -15,7 +15,7 @@ const Contract = () => {
     const [project, setProject] = useState({})
     const [deletedFiles, setDeletedFiles] = useState([])
     console.log(deletedFiles)
-    console.log(project)
+    console.log('project', project)
 
     useEffect(() => {
         setLoading(true)
@@ -131,6 +131,8 @@ const Contract = () => {
                     }
 
                     <button className='btn' type="submit">Save</button>
+
+                    <div className='user_info_table' dangerouslySetInnerHTML={{__html: project?.user_info}}/>
                 </form>
             </div>}
         </>

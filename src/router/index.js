@@ -41,7 +41,7 @@ export const router = createHashRouter([
         },
         {
             path: "/admin/contract/:number",
-            element: <Contract/>
+            element: <PrivateRoutesAdmin><Contract/></PrivateRoutesAdmin>
         },
     ]
 )
