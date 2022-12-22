@@ -20,7 +20,7 @@ const Project = () => {
         setLoading(true)
         fetch(`${baseUrl}/doc/${number}`).then((res) => res.json()).then(res => setProject(res))
         setTimeout(() => setLoading(false), 1500)
-    }, [])
+    }, [number])
 
 
     return (

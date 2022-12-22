@@ -1,16 +1,14 @@
 import React, {useRef, useState} from 'react';
-import {useDispatch} from "react-redux";
 import Header from "../../components/header/header";
 import Block from "../../components/projectBlock/block/block";
 import {baseUrl} from "../../constants/api";
 
 
 import "./home.css"
-import {getProject} from "../../store/slice/projectSliceSlice";
 
 
 const Home = () => {
-    const dispatch = useDispatch()
+
     const inputRef = useRef(null)
     const [res, setRes] = useState({})
 
@@ -24,10 +22,7 @@ const Home = () => {
 
         const data = await res.json()
         setRes(data)
-        // dispatch(getProject(data))
-
     }
-
 
 
     return (

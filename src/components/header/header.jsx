@@ -18,7 +18,7 @@ const Header = () => {
     const singIn = () => {
         navigate('/login')
     }
-    const goHome = () =>{
+    const goHome = () => {
         navigate('/')
     }
     return (

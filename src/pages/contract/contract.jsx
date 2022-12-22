@@ -47,13 +47,12 @@ const Contract = () => {
     }
 
     const onChangeFiles = async (e) => {
-        console.log(e.target.files)
-        setProject({...project, docs: [...e.target.files]})
+        setProject({...project, docs: [...project.docs, ...e.target.files]})
     }
     const removeUploadedFile = (name) => {
         const arr = project.docs.filter((item) => item !== name)
         setProject({...project, docs: arr})
-        setDeletedFiles(prev=>[...deletedFiles,name])
+        setDeletedFiles(prev => [...deletedFiles, name])
     }
     const removeFile = (file) => {
         const arr = project.docs.filter((item) => item.name !== file.name)
@@ -63,26 +62,29 @@ const Contract = () => {
         event.preventDefault()
         const formData = new FormData()
         await project.docs.forEach((item) => {
-            formData.append(`${item.name}`, item)
+            if (typeof item !== "string") formData.append(`${item.name}`, item)
         })
         formData.append(`status`, project.status)
 
-        const res = await fetch(`http://localhost:8080/admin/project/${number}`,
-            {
-                method: "PUT",
-                body: formData
-            })
-        const updatedProject = await res.json()
-
         if (deletedFiles.length !== 0) {
-            await fetch(`http://localhost:8080/admin/project/${number}`,
+            await fetch(`${baseUrl}/admin/project/${number}`,
                 {
                     method: "DELETE",
-                    headers: { "Content-Type": "application/json" },
+                    headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(deletedFiles)
                 })
         }
-        setProject(updatedProject)
+        if (deletedFiles.length === 0) {
+            const res = await fetch(`${baseUrl}/admin/project/${number}`,
+                {
+                    method: "PUT",
+                    body: formData
+                })
+            const updatedProject = await res.json()
+            setProject(updatedProject)
+        }
+
+
     }
 
     return (
@@ -119,8 +121,7 @@ const Contract = () => {
                             return <div className="show_upload_files" key={index}>
                                 {typeof item === 'string' ?
                                     <a className={"doc"} href={`http://localhost:8080/${item}`} target="_blank"
-                                       rel="noreferrer">doc
-                                        ${index}</a> :
+                                       rel="noreferrer">doc {index + 1}</a> :
                                     <p className={"name"}>{item.name}</p>}
                                 <button className="remove" type={"button"}
                                         onClick={() => typeof item === 'string' ? removeUploadedFile(item) : removeFile(item)}>X
