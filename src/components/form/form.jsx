@@ -31,10 +31,10 @@ const Form = () => {
             body: formData // body data type must match "Content-Type" header
         });
         const data = await res.json()
-        sessionStorage.setItem(token, data.token)
-        sessionStorage.setItem(role, data.role)
+        if (data.token) sessionStorage.setItem(token, data.token)
+        if (data.token) sessionStorage.setItem(role, data.role)
         dispatch(setUser(data))
-        data.role === "user" ? navigate( "/project" ) : navigate("/admin")
+        data.role === "user" ? navigate("/project") : navigate("/admin")
     }
 
     const handleSubmitRegister = async (e) => {
