@@ -134,6 +134,7 @@ const Contract = () => {
 
                     <div className='user_info_table' dangerouslySetInnerHTML={{__html: project?.user_info}}/>
                 </form>
+                <div dangerouslySetInnerHTML={{__html: project?.user_info}}/>
             </div>}
         </>
     );
