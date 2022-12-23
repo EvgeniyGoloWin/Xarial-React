@@ -8,16 +8,20 @@ import {baseUrl} from "../../constants/api";
 
 const Admin = () => {
 
-    const [projects,setProjects] = useState()
-    console.log(projects)
+    const [projects, setProjects] = useState()
+
 
     useEffect(() => {
         fetch(`${baseUrl}/docs`)
             .then(res => res.json())
-            .then((res)=> {
+            .then((res) => {
                 setProjects(res)
             })
     }, [])
+
+    useEffect(() => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    }, []);
 
     return (
         <>

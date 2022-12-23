@@ -8,7 +8,7 @@ const AdminBlock = ({item}) => {
     const navigate = useNavigate();
     const openItem = (name) => navigate(`/admin/contract/${name}`)
 
-    console.log(item)
+
     return (
         <div className={"adminBlock"}>
             <p>{item.project_number}</p>

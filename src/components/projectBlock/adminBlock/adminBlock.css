@@ -8,4 +8,8 @@
     margin: 10px;
 }
 
-
+@media (max-width: 565px) {
+    .adminBlock {
+        width: 85%;
+    }
+}
