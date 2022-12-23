@@ -5,7 +5,8 @@
     align-items: center;
     justify-content: space-between;
 }
-.goHome:hover{
+
+.goHome:hover {
     cursor: pointer;
 }
 
@@ -45,6 +46,16 @@
     border: 1px solid white;
     padding: 10px;
     border-radius: 10px;
+}
+
+.link {
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.link:hover {
+    cursor: pointer;
 }
 
 @media (max-width: 475px) {
