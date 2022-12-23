@@ -20,13 +20,17 @@ const Header = () => {
     const goHome = () => {
         navigate('/')
     }
+    const toAdmin = () => {
+        navigate('/admin')
+    }
     return (
         <header className={"header"}>
             <div className={"logo"}>
                 <p className={"goHome"} onClick={goHome}>Xarial CMS</p>
             </div>
-            <div>
-                {(admin && location.pathname !== "/admin") && <Link className={"link"} href={"/admin"}>admin</Link>}
+            <div className={"links"}>
+                {(admin && location.pathname !== "/admin") &&
+                    <button className={"link"} onClick={toAdmin}>admin</button>}
                 {auth ? <button onClick={logOut} className={"btn"}>Log out</button> :
                     <button onClick={singIn} className={"btn"}>Sing in</button>}
             </div>
