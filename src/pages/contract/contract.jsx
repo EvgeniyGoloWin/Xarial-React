@@ -124,7 +124,7 @@ const Contract = () => {
                         Array.from(project?.docs).map((item, index) => {
                             return <div className="show_upload_files" key={index}>
                                 {typeof item === 'string' ?
-                                    <a className={"doc"} href={`http://localhost:8080/${item}`} target="_blank"
+                                    <a className={"doc"} href={`https://test-nscu.onrender.com/${item}`} target="_blank"
                                        rel="noreferrer">doc {index + 1}</a> :
                                     <p className={"name"}>{item.name}</p>}
                                 <button className="remove" type={"button"}

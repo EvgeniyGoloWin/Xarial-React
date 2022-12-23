@@ -40,7 +40,11 @@ const Project = () => {
                 </p>
 
                <div>
-                    {project?.docs}
+                    {
+                        project?.docs.map((item, index) =>
+                            <a className={"doc"} href={`https://test-nscu.onrender.com/${item}`} target="_blank"
+                               rel="noreferrer">doc {index + 1}</a> )
+                    }
                </div>
             </div>}
         </>
