@@ -6,11 +6,12 @@ import {useParams} from "react-router";
 
 
 import "./project.css"
+import {useNavigate} from "react-router-dom";
 
 
 const Project = () => {
     const {number} = useParams()
-
+    const navigate = useNavigate()
     const [project, setProject] = useState(null)
     const [loading, setLoading] = useState(false)
 
@@ -22,12 +23,15 @@ const Project = () => {
         setTimeout(() => setLoading(false), 1500)
     }, [number])
 
+    const onClickBackHome = () => navigate('/')
 
     return (
         <>
             <Header/>
             {loading ? <p className={"loader"}>Data is loading...</p> : <div className={"user"}>
-
+                <div className="sub-header">
+                    <button className="sub-header-button_back" onClick={onClickBackHome}>&#8592; back</button>
+                </div>
                 <p className={"project"}>
                     <b>Your project number is</b> : {project?.project_number}
                 </p>

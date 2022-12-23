@@ -6,10 +6,12 @@ import dragAndDrop from "../../assets/icons/drag.png";
 
 
 import './contract.css'
+import {useNavigate} from "react-router-dom";
 
 
 const Contract = () => {
     const {number} = useParams()
+    const navigate = useNavigate()
     const [status, setStatus] = useState(null)
     const [loading, setLoading] = useState(false)
     const [project, setProject] = useState({})
@@ -83,14 +85,16 @@ const Contract = () => {
             const updatedProject = await res.json()
             setProject(updatedProject)
         }
-
-
     }
+    const onClickBackAdmin = () => navigate('/admin')
 
     return (
         <>
             <Header/>
             {loading ? <p>Data is loading</p> : <div className="wrapper_contract">
+                <div className="sub-header">
+                    <button className="sub-header-button_back" onClick={onClickBackAdmin}>&#8592; back</button>
+                </div>
                 <form className={"form_contract"} onSubmit={(e) => onHandleSubmit(e)}>
                     <label className={"label_contract"}>
                         <p>Project number is: {project?.project_number}</p>
