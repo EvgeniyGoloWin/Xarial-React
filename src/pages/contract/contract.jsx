@@ -3,10 +3,10 @@ import Header from "../../components/header/header";
 import {baseUrl} from "../../constants/api";
 import {useParams} from "react-router";
 import dragAndDrop from "../../assets/icons/drag.png";
-
+import {useNavigate} from "react-router-dom";
 
 import './contract.css'
-import {useNavigate} from "react-router-dom";
+
 
 
 const Contract = () => {
@@ -16,8 +16,7 @@ const Contract = () => {
     const [loading, setLoading] = useState(false)
     const [project, setProject] = useState({})
     const [deletedFiles, setDeletedFiles] = useState([])
-    console.log(deletedFiles)
-    console.log('project', project)
+
 
     useEffect(() => {
         setLoading(true)
@@ -100,7 +99,7 @@ const Contract = () => {
                         <p>Project number is: {project?.project_number}</p>
                     </label>
                     <div>
-                        <select className={"select"} onChange={(e) => changeSelectValue(e)}>
+                        <select className={"select"} onChange={(e) => changeSelectValue(e)} value={project?.status}>
                             <option value={project?.status}>{project?.status}</option>
                             {status?.filter((status) => status !== project.status).map((item, index) => (
                                 <option key={`${index}`} value={item}>

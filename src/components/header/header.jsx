@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {token} from "../../constants/storageKey";
 
 import "./header.css"
@@ -7,9 +7,8 @@ import "./header.css"
 
 const Header = () => {
     const navigate = useNavigate()
-
+    const location = useLocation()
     const auth = sessionStorage.getItem(token)
-
 
     const logOut = () => {
         sessionStorage.clear()
