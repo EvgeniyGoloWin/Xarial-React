@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import AdminBlock from "../../components/projectBlock/adminBlock/adminBlock";
 import Header from "../../components/header/header";
+import {baseUrl} from "../../constants/api";
+
 
 import "./admin.css"
-import {baseUrl} from "../../constants/api";
 
 
 const Admin = () => {

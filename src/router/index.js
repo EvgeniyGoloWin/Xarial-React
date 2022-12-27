@@ -8,6 +8,7 @@ import Admin from "../pages/admin/admin";
 import PrivateRoutesAdmin from "../components/privateRoutesAdmin/privateRoutesAdmin";
 import Project from "../pages/project/project";
 import Contract from "../pages/contract/contract";
+import EditStatus from "../pages/editStatus/editStatus";
 
 
 export const router = createHashRouter([
@@ -43,5 +44,9 @@ export const router = createHashRouter([
             path: "/admin/contract/:number",
             element: <PrivateRoutesAdmin><Contract/></PrivateRoutesAdmin>
         },
+        {
+            path: "/admin/editStatus",
+            element: <PrivateRoutesAdmin><EditStatus/></PrivateRoutesAdmin>
+        }
     ]
 )

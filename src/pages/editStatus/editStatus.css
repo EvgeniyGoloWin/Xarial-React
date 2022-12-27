@@ -1,0 +1,38 @@
+.editPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    flex-direction: column;
+}
+
+.status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
+    min-width: 300px;
+}
+
+.section_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add_status {
+    display: flex;
+    justify-content: space-between;
+    min-width: 320px;
+}
+
+.input_status {
+    background: #EDF2F7;
+    border-radius: 5px;
+    padding: 15px;
+    min-width: 230px;
+    border: none;
+}
