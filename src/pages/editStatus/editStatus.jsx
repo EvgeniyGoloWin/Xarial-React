@@ -29,7 +29,7 @@ const EditStatus = () => {
 
     const handleClickSave = async () => {
 
-        const res = await fetch(`http://localhost:8080/status`, {
+        const res = await fetch(`${baseUrl}/status`, {
             method: 'PUT',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(state)
