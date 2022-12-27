@@ -27,6 +27,9 @@ const Header = () => {
     const toEditStatus = () => {
         navigate('/admin/editStatus')
     }
+    const toEditForm = () => {
+        navigate('/admin/editForm')
+    }
 
     return (
         <header className={"header"}>
@@ -36,7 +39,9 @@ const Header = () => {
             <div className={"links"}>
                 {(admin && location.pathname !== "/admin") &&
                     <button className={"link"} onClick={toAdmin}>Admin</button>}
-                { location.pathname === "/admin" && <button className={"link"} onClick={toEditStatus}>Edit status</button>}
+                {location.pathname === "/admin" &&
+                    <button className={"link"} onClick={toEditStatus}>Edit status</button>}
+                {location.pathname === "/admin" && <button className={"link"} onClick={toEditForm}>Edit form</button>}
                 {auth ? <button onClick={logOut} className={"btn"}>Log out</button> :
                     <button onClick={singIn} className={"btn"}>Sing in</button>}
             </div>
