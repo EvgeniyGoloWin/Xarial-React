@@ -48,6 +48,7 @@ const form = {
                 },
                 {
                     title: "What type of service are you looking for?",
+                    typeBlock: 'transition_form',
                     elements: [{
                         tag: "input",
                         type: "radio",
@@ -71,19 +72,18 @@ const form = {
                         },]
                 }
             ]
-
-
         }, {
             form1: [
                 {
                     title: "What type of application do you want to develop?",
-                    elements: [{
-                        tag: "input",
-                        type: "radio",
-                        name: "application",
-                        value: 'VBA Macro',
-                        label: "New Product/Macro development"
-                    },
+                    elements: [
+                        {
+                            tag: "input",
+                            type: "radio",
+                            name: "application",
+                            value: 'VBA Macro',
+                            label: "New Product/Macro development"
+                        },
                         {
                             tag: "input",
                             type: "radio",
@@ -103,7 +103,8 @@ const form = {
                             name: "application",
                             value: 'Not Sure',
                             label: "Not Sure"
-                        }]
+                        }
+                    ]
                 }, {
                     title: "Describe the product you are looking to develop",
                     element: {
@@ -114,13 +115,14 @@ const form = {
                     }
                 }, {
                     title: "Will this product be used",
-                    elements: [{
-                        tag: "input",
-                        type: "radio",
-                        name: "product",
-                        value: 'Internally in the company',
-                        label: "Internally in the company"
-                    },
+                    elements: [
+                        {
+                            tag: "input",
+                            type: "radio",
+                            name: "product",
+                            value: 'Internally in the company',
+                            label: "Internally in the company"
+                        },
                         {
                             tag: "input",
                             type: "radio",
@@ -134,7 +136,8 @@ const form = {
                             name: "product",
                             value: 'Both',
                             label: "Both"
-                        }]
+                        }
+                    ]
                 }, {
                     title: "Expected product delivery date",
                     element: {
@@ -231,14 +234,7 @@ const form = {
     footer: {
         buttons: {
             next: "Next",
-            back: [
-                {first: {title: "Back", value: "1"}},
-                {second: {title: "Back", value: "2"}}, {
-                    third: {
-                        title: "Back",
-                        value: "3"
-                    }
-                }],
+            back: "Back",
             clear: "Clear Form"
         }
     }
