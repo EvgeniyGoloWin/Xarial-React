@@ -26,7 +26,104 @@
     width: 100vh;
 }
 
-.input {
+.form__group__header {
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-top: 10px solid rgb(103, 58, 183);
+}
+
+.block_btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 50px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+input:checked[type="checkbox"] {
+    background: rgb(103, 58, 183);
+}
+
+input[type="checkbox"]::after {
+    position: absolute;
+    content: "";
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+    transition: 0.4s;
+}
+
+input:checked[type="checkbox"]::after {
+    left: 50%;
+}
+
+.btn_btn {
+    margin: 10px;
+    text-decoration: none;
+    border: 1px solid #dadce0;
+    box-shadow: 10px 5px 5px #d9d0d0;
+    position: relative;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 15px;
+    padding: 12px 30px;
+    color: rgb(103, 58, 183);
+    font-weight: 500;
+    font-family: 'Roboto Condensed', Тahoma, sans-serif;
+    background: #FFF;
+    transition: box-shadow 0.3s, transform 0.3s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.btn_btn:hover,
+.btn_btn:active,
+.btn_btn:focus {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 16px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn_btn:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, transparent, rgba(191, 226, 255, 0.3), transparent);
+    transition: left 0.7s;
+}
+
+.btn_btn:hover:before,
+.btn_btn:active:before,
+.btn_btn:focus:before {
+    left: 100%;
+}
+
+.edit_input {
     width: 50%;
     height: 30px;
     border: none;
@@ -40,6 +137,39 @@
     border-bottom: 1px solid #ccc;
 }
 
-.input::placeholder {
+.edit_input::placeholder {
     color: #ccc;
+}
+
+/*.container-btns {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: space-between;*/
+/*}*/
+.radioBtn.service {
+    line-height: 2.5;
+    letter-spacing: .2px;
+}
+
+.radioBtn.application {
+    line-height: 2.5;
+    letter-spacing: .2px;
+}
+
+.radioBtn.product {
+    line-height: 2.5;
+    letter-spacing: .2px;
+}
+
+.radioBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.radioBtn label {
+    display: flex;
+    line-height: 30px;
+    margin: 5px;
+    flex-direction: row-reverse;
 }
