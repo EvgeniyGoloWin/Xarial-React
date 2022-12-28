@@ -274,6 +274,8 @@ const formData = {
 // }]
 
 const EditFrom = () => {
+    const test = JSON.stringify(formData)
+    console.log(test)
     const [state, setState] = useState(formData)
 
     const handleChange = (e, a, b) => {
