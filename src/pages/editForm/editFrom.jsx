@@ -250,30 +250,6 @@ const formData = {
     }
 }
 
-// const mock = [{
-//     divClassName: "form__group",
-//     pClassName: "question",
-//     pText: `Your email`,
-//     inputType: "email",
-//     inputName: "email",
-//     inputPlaceholder: 'Email'
-//
-// }, {
-//     divClassName: "form__group",
-//     pClassName: "question",
-//     pText: `Name`,
-//     inputType: "text",
-//     inputName: "name",
-//     inputPlaceholder: 'Name'
-// }, {
-//     divClassName: "form__group",
-//     pClassName: "question",
-//     pText: `Company`,
-//     inputType: "text",
-//     inputName: "Company",
-//     inputPlaceholder: 'Company'
-// }]
-
 const EditFrom = () => {
 
     useEffect(() => {
@@ -316,13 +292,21 @@ const EditFrom = () => {
         await setState({...state, body: body})
 
     }
+    const handleSubmit = async () => {
+        const res = await fetch(`${baseUrl}/user/login`, {
+            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+            body: JSON.stringify(state) // body data type must match "Content-Type" header
+        });
+        const data = await res.json()
+        setState(data)
+    }
 
     return (
         <>
             <Header/>
             {loading ? <p>data is loading</p> :
                 <div className={"page"}>
-                    <form id="form" className="js-form">
+                    <form id="form" className="js-form" onSubmit={handleSubmit}>
                         <div className="form__group__header">
                             <h1>{state?.header?.title}</h1>
                         </div>
@@ -372,7 +356,7 @@ const EditFrom = () => {
                                 <button className="btn_btn" type="reset">{state?.footer?.buttons?.clear}</button>
                             </div>
                         </div>
-                        <button className="btn">
+                        <button className="btn" type={"submit"}>
                             Save
                         </button>
                     </form>
