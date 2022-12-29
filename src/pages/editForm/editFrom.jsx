@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from "../../components/header/header";
 
 import "./editFrom.css"
+import {baseUrl} from "../../constants/api";
 
 const formData = {
     header: {
@@ -274,71 +275,109 @@ const formData = {
 // }]
 
 const EditFrom = () => {
-    const test = JSON.stringify(formData)
-    console.log(test)
-    const [state, setState] = useState(formData)
 
-    const handleChange = (e, a, b) => {
+    useEffect(() => {
+        setLoading(true)
+
+        fetch(`${baseUrl}/form`).then((res) => res.json()).then((res2) => setState(res2))
+        setTimeout(() => {
+            setLoading(false)
+        }, 1500)
+    }, [])
+    const [state, setState] = useState(formData)
+    const [loading, setLoading] = useState(false)
+
+    console.log(state)
+
+    const handleChangeInputTitle = async (e, a, b) => {
         e.stopPropagation()
+        e.preventDefault()
         let value = e.target.value
-        setState({...state, body: state.body[a][b].title = value})
+
+        const title = await {...state.body[a][b], title: value}
+
+
+        const arr = state.body[a].map((item, index) => {
+            if (index === b) {
+                return title
+            } else {
+                return item
+            }
+        })
+        const body = state.body.map((item, index) => {
+            if (index === a) {
+                return arr
+            } else {
+                return item
+            }
+        })
+
+
+        await setState({...state, body: body})
 
     }
 
     return (
         <>
             <Header/>
-            <div className={"page"}>
-                <form id="form" className="js-form">
-                    <div className="form__group__header">
-                        <h1>{state.header.title}</h1>
-                    </div>
-                    <div id="main-block" className="js-form">
-                        {state.body.map((data, index) => {
-                            return <div key={index}>
-                                {data.map((item, index1) => {
+            {loading ? <p>data is loading</p> :
+                <div className={"page"}>
+                    <form id="form" className="js-form">
+                        <div className="form__group__header">
+                            <h1>{state?.header?.title}</h1>
+                        </div>
+                        <div id="main-block" className="js-form">
+                            {state?.body?.map((data, index) => {
+                                return <div key={index}>
+                                    {data.map((item, index1) => {
 
-                                    return item.element ? <div className="form__group" key={`${index1}`}>
-                                            <input className="question" value={item.title} onChange={(e)=>handleChange(e,index,index1)}/>
-                                            {item.element && <input type={`${item.element.type}`}
-                                                                    className="edit_input js-input js-input-email answer"
-                                                                    name={`${item.element.name}`}
-                                                                    placeholder={`${item.element.placeholder}`}/>}
-
-                                        </div>
-                                        :
-                                        <div className="form__group" key={`${index1}`}>
-                                             <input className="question" value={item.title} onChange={()=>handleChange(index,index1)}/>
-                                            <div className="radioBtn service">
-                                                {item?.elements.map((btn, index) => {
-                                                    console.log(btn)
-                                                    return <span key={`${index}`}><label htmlFor={btn.value}>{
-                                                        btn.label
-                                                    }
-                                                        <input className="answer" type={btn.type} id="1" name={btn.name}
-                                                               value={btn.value}/>
-                                    </label></span>
-                                                })}
+                                        return item.element ? <div className="form__group" key={`${index1}`}>
+                                                <input className="editInput" defaultValue={item.title}
+                                                       onChange={(e) => handleChangeInputTitle(e, index, index1)}/>
+                                                {item.element && <input type={`${item.element.type}`}
+                                                                        className="edit_input js-input js-input-email answer"
+                                                                        name={`${item.element.name}`}
+                                                                        placeholder={`${item.element.placeholder}`}/>}
 
                                             </div>
-                                        </div>
-                                })}
+                                            :
+                                            <div className="form__group" key={`${index1}`}>
+                                                <input className="editInput" value={item.title}
+                                                       onChange={(e) => handleChangeInputTitle(e, index, index1)}/>
+                                                <div className="radioBtn service">
+                                                    {item?.elements.map((btn, index) => {
+                                                        return <span key={`${index}`}><label htmlFor={btn.value}>{
+                                                            btn.label
+                                                        }
+                                                            <input className="answer" type={btn.type} id="1"
+                                                                   name={btn.name}
+                                                                   value={btn.value}/>
+                                    </label></span>
+                                                    })}
+
+                                                </div>
+                                            </div>
+                                    })}
+                                </div>
+                            })}
+
+
+                            <div className="block_btn">
+                                <button className="btn_btn">
+                                    {state?.footer?.buttons?.next}
+                                </button>
+                                <button className="btn_btn">
+                                    {state?.footer?.buttons?.back}
+                                </button>
+                                <button className="btn_btn" type="reset">{state?.footer?.buttons?.clear}</button>
                             </div>
-                        })}
-
-
-                        <div className="block_btn">
-                            <button className="btn_btn">
-                                {state.footer.buttons.next}
-                            </button>
-                            <button className="btn_btn">
-                                {state.footer.buttons.back}
-                            </button>
-                            <button className="btn_btn" type="reset">{state.footer.buttons.clear}</button>
                         </div>
-                    </div>
-                </form>
-            </div>
+                        <button className="btn">
+                            Save
+                        </button>
+                    </form>
+                </div>
+            }
         </>
     )
         ;
