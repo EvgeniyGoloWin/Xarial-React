@@ -6,11 +6,10 @@ const EditStatusItem = ({item,index,handleClickUpdate,handleClickRemove}) => {
     const inputEditRef = useRef(null)
     const [edit, setEdit] = useState(false)
 
+
     return (
-        <div className="status"><p>
-        {item}
-    </p>
-        { edit && <input ref={inputEditRef}/> }
+        <div className="status">
+        {edit ? <input defaultValue={item} type="text" ref={inputEditRef}/> : <p>{item}</p>}
         <div className='btns_icon'>
             <img onClick={() => setEdit(true)} className='edit_icon' src={edit_icon}/>
             {!edit && <button onClick={() => handleClickRemove(item)} className="remove" type={"button"}>X</button>}
