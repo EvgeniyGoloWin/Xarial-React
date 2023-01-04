@@ -36,3 +36,17 @@
     min-width: 230px;
     border: none;
 }
+
+.edit_icon {
+    width: 15px;
+    height: 15px;
+}
+
+.save_icon {
+    width: 20px;
+    height: 20px;
+}
+
+.btns_icon {
+    display: flex;
+}
