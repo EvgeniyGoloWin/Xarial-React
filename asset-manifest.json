@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Xarial-React/static/css/main.71dc223b.css",
-    "main.js": "/Xarial-React/static/js/main.cb3cd63e.js",
+    "main.css": "/Xarial-React/static/css/main.38bb0434.css",
+    "main.js": "/Xarial-React/static/js/main.cf95235b.js",
     "index.html": "/Xarial-React/index.html",
-    "main.71dc223b.css.map": "/Xarial-React/static/css/main.71dc223b.css.map",
-    "main.cb3cd63e.js.map": "/Xarial-React/static/js/main.cb3cd63e.js.map"
+    "main.38bb0434.css.map": "/Xarial-React/static/css/main.38bb0434.css.map",
+    "main.cf95235b.js.map": "/Xarial-React/static/js/main.cf95235b.js.map"
   },
   "entrypoints": [
-    "static/css/main.71dc223b.css",
-    "static/js/main.cb3cd63e.js"
+    "static/css/main.38bb0434.css",
+    "static/js/main.cf95235b.js"
   ]
 }
