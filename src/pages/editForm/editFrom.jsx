@@ -6,7 +6,6 @@ import {baseUrl} from "../../constants/api";
 
 
 const EditFrom = () => {
-
     useEffect(() => {
         setLoading(true)
 
@@ -15,10 +14,9 @@ const EditFrom = () => {
             setLoading(false)
         }, 1500)
     }, [])
+
     const [state, setState] = useState([])
     const [loading, setLoading] = useState(false)
-
-    console.log(state)
 
     const handleChangeInputTitle = async (e, a, b) => {
         e.stopPropagation()
@@ -35,7 +33,6 @@ const EditFrom = () => {
                 return item
             }
         })
-
 
         const body = state.body.map((item, index) => {
             if (index === a) {
