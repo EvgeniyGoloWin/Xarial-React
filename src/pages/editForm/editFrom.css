@@ -13,6 +13,8 @@
     padding: 24px;
     margin-bottom: 15px;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 .icon-star {
@@ -169,4 +171,37 @@ input:checked[type="checkbox"]::after {
 
 .editInput {
     width: 50%;
+}
+
+.subheader {
+    letter-spacing: 0.2px;
+    margin: 0;
+    color: white;
+    padding: 12px 24px;
+    background-color: rgb(103, 58, 183);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+@media (max-width: 767px) {
+    .js-form {
+        width: 100%;
+    }
+
+    .input {
+        width: 100%;
+    }
+
+    .final-step {
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}
+
+.block_btn {
+    display: flex;
+    justify-content: space-between;
 }

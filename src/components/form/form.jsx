@@ -62,12 +62,12 @@ const Form = () => {
             <div className={"form_group"}>
                 <label htmlFor={"email"} className={"label"}>Email address</label>
                 <input id={"email"} className={"input"} type="text" name={"email"} value={formState.email}
-                       onChange={(event => handleOnChange(event))}/>
+                       onChange={(event => handleOnChange(event))} required/>
             </div>
             <div className={"form_group"}>
                 <label htmlFor={"password"} className={"label"}>Password</label>
                 <input id={"password"} className={"input"} type="password" name={"password"} value={formState.password}
-                       onChange={(event => handleOnChange(event))}/>
+                       onChange={(event => handleOnChange(event))} required/>
             </div>
             <div className='form_btn'>
                 {page && <button className='btn_forgot' type={"button"} onClick={register}> Registration</button>}
