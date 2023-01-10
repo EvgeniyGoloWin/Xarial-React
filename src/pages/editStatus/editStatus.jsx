@@ -46,6 +46,7 @@ const EditStatus = () => {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(state)
         });
+
         const data = await res.json()
         setState(data)
     }
