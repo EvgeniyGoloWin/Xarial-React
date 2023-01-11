@@ -22,10 +22,10 @@ const EditFrom = () => {
         e.stopPropagation()
         e.preventDefault()
         let value = e.target.value
-        const element = {...state.body[a].form[b].element, name: value}
+        // const element = {...state.body[a].form[b].element, name: value}
 
-        const formEl = {title: value, element}
-
+        const formEl = {...state.body[a].form[b], title: value}
+        console.log(formEl)
         const arr = state.body[a].form.map((item, index) => {
             if (index === b) {
                 return formEl
@@ -42,32 +42,32 @@ const EditFrom = () => {
             }
         })
 
-        await setState({...state, body: body})
+         setState({...state,  body: body})
 
     }
 
-    const handleInputChangeRadio = async (e, a, b) => {
-        const title = {...state.body[a].form[b], title: e.target.value}
-
-        const arr = state.body[a].form.map((item, index) => {
-            if (index === b) {
-                return title
-            } else {
-                return item
-            }
-        })
-
-
-        const body = state.body.map((item, index) => {
-            if (index === a) {
-                return {...item, form: arr}
-            } else {
-                return item
-            }
-        })
-
-        await setState({...state, body: body})
-    }
+    // const handleInputChangeRadio = async (e, a, b) => {
+    //     const title = {...state.body[a].form[b], title: e.target.value}
+    //
+    //     const arr = state.body[a].form.map((item, index) => {
+    //         if (index === b) {
+    //             return title
+    //         } else {
+    //             return item
+    //         }
+    //     })
+    //
+    //
+    //     const body = state.body.map((item, index) => {
+    //         if (index === a) {
+    //             return {...item, form: arr}
+    //         } else {
+    //             return item
+    //         }
+    //     })
+    //
+    //     await setState({...state, body: body})
+    // }
     const handleSubmit = async (e) => {
         e.preventDefault()
         const res = await fetch(`http://localhost:8080/form`, {
@@ -105,7 +105,7 @@ const EditFrom = () => {
                                             :
                                             <div className="form__group" key={`${index1}`}>
                                                 <input className="editInput" value={item.title}
-                                                       onChange={(e) => handleInputChangeRadio(e, index, index1)}/>
+                                                       onChange={(e) => handleChangeInputTitle(e, index, index1)}/>
                                                 <div className="radioBtn service">
                                                     {item?.elements.map((btn, index) => {
                                                         return <span key={`${index}`}><label htmlFor={btn.value}>{
