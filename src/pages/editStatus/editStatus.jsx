@@ -22,20 +22,19 @@ const EditStatus = () => {
         setState(arr)
     }
 
-    const handleClickUpdate = (index,text) => {
-        const updateText = state.map((item,i)=> {
-            if(index === i) {
+    const handleClickUpdate = (index, text) => {
+        const updateText = state.map((item, i) => {
+            if (index === i) {
                 return text
             } else {
                 return item
             }
         })
-         setState(updateText)
+        setState(updateText)
     }
 
-    const handleClickAdd =  () => {
-        console.log(inputRef.current.value)
-         setState( [...state, inputRef.current.value])
+    const handleClickAdd = () => {
+        setState([...state, inputRef.current.value])
         inputRef.current.value = ''
     }
 
@@ -51,23 +50,24 @@ const EditStatus = () => {
         setState(data)
     }
 
-        return (
-            <>
-                <Header/>
-                <div className="editPage">
-                    <div className="add_status">
-                        <input className="input_status" ref={inputRef}/>
-                        <button className="btn" onClick={handleClickAdd}>Add</button>
-                    </div>
-                    {state.length && state?.map((item, index) => {
-                        return <EditStatusItem key={index} item={item} index={index} handleClickUpdate={handleClickUpdate} handleClickRemove={handleClickRemove}/>
-                    })}
-                    <div className='section_btn'>
-                        <button type="button" onClick={handleClickSave} className="btn">Save</button>
-                    </div>
+    return (
+        <>
+            <Header/>
+            <div className="editPage">
+                <div className="add_status">
+                    <input className="input_status" ref={inputRef}/>
+                    <button className="btn" onClick={handleClickAdd}>Add</button>
                 </div>
-            </>
-        );
+                {state.length && state?.map((item, index) => {
+                    return <EditStatusItem key={index} item={item} index={index} handleClickUpdate={handleClickUpdate}
+                                           handleClickRemove={handleClickRemove}/>
+                })}
+                <div className='section_btn'>
+                    <button type="button" onClick={handleClickSave} className="btn">Save</button>
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default EditStatus;

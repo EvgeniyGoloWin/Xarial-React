@@ -1,42 +1,37 @@
-const formData = {
+export const mockData = {
     header: {
         title: "Xarial Development Services Quote",
     },
     body: [
         {
-
             form: [
                 {
-                    title: "Your email",
                     element: {
-                        tag: "input",
+                        title: "Your email",
                         type: "email",
                         name: "email",
                         placeholder: "Email"
                     }
                 },
                 {
-                    title: "Name",
                     element: {
-                        tag: "input",
+                        title: "Name",
                         type: "text",
                         name: "name",
                         placeholder: "Name"
                     }
                 },
                 {
-                    title: "Company",
                     element: {
-                        tag: "input",
+                        title: "Company",
                         type: "text",
                         name: "company",
                         placeholder: "Company"
                     }
                 },
                 {
-                    title: "Country",
                     element: {
-                        tag: "input",
+                        title: "Country",
                         type: "text",
                         name: "country",
                         placeholder: "Country"
@@ -44,23 +39,19 @@ const formData = {
                 },
                 {
                     title: "What type of service are you looking for?",
-                    typeBlock: 'transition_form',
                     elements: [
                         {
-                            tag: "input",
                             type: "radio",
                             name: "service",
                             value: '1',
                             label: "New Product/Macro development"
                         }, {
-                            tag: "input",
                             type: "radio",
                             name: "service",
                             value: '2',
                             label: "SOLIDWORKS API consultancy"
                         },
                         {
-                            tag: "input",
                             type: "radio",
                             name: "service",
                             value: '3',
@@ -76,37 +67,33 @@ const formData = {
                     title: "What type of application do you want to develop?",
                     elements: [
                         {
-                            tag: "input",
                             type: "radio",
                             name: "application",
                             value: 'VBA Macro',
                             label: "New Product/Macro development"
                         },
                         {
-                            tag: "input",
                             type: "radio",
                             name: "application",
                             value: 'Add-in',
                             label: "SOLIDWORKS API consultancy"
                         },
                         {
-                            tag: "input",
                             type: "radio",
                             name: "application",
                             value: 'Stand-alone application',
                             label: "Stand-alone application"
                         }, {
-                            tag: "input",
                             type: "radio",
                             name: "application",
                             value: 'Not Sure',
                             label: "Not Sure"
                         }
                     ]
-                }, {
-                    title: "Describe the product you are looking to develop",
+                },
+                {
                     element: {
-                        tag: "input",
+                        title: "Describe the product you are looking to develop",
                         type: "text",
                         name: "describe",
                         placeholder: "Answer"
@@ -115,21 +102,18 @@ const formData = {
                     title: "Will this product be used",
                     elements: [
                         {
-                            tag: "input",
                             type: "radio",
                             name: "product",
                             value: 'Internally in the company',
                             label: "Internally in the company"
                         },
                         {
-                            tag: "input",
                             type: "radio",
                             name: "product",
                             value: 'Externally (resale)',
                             label: "Externally (resale)"
                         },
                         {
-                            tag: "input",
                             type: "radio",
                             name: "product",
                             value: 'Both',
@@ -138,31 +122,25 @@ const formData = {
                     ]
                 },
                 {
-
-                    title: "Expected product delivery date",
                     element: {
-                        tag: "input",
+                        title: "Expected product delivery date",
                         type: "date",
                         name: "Expected product delivery date",
-                        // placeholder: "Answer"??
                     }
                 },
                 {
-                    title: "Do you have a budget for this service, if so, please specify the range",
                     element: {
-                        tag: "input",
+                        title: "Do you have a budget for this service, if so, please specify the range",
                         type: "text",
                         name: "budget",
                         placeholder: "Answer"
                     }
                 },
                 {
-                    title: "Get a copy of the answers",
                     element: {
-                        tag: "input",
+                        title: "Get a copy of the answers",
                         type: "checkbox",
                         name: "copy",
-                        // placeholder: "Answer"??
                     }
                 }
             ]
@@ -171,30 +149,27 @@ const formData = {
             subtitle: "Will this product be used",
             form: [
                 {
-                    title: "Describe the requirements ",
                     element: {
-                        tag: "input",
+                        title: "Describe the requirements ",
                         type: "text",
                         name: "Describe the requirements",
                         placeholder: "Answer"
                     }
                 },
                 {
-                    title: "Do you have a budget for this service, if so, please specify the range",
+
                     element: {
-                        tag: "input",
+                        title: "Do you have a budget for this service, if so, please specify the range",
                         type: "text",
                         name: "Do you have a budget for this service, if so, please specify the range",
                         placeholder: "Answer"
                     }
                 },
                 {
-                    title: "Get a copy of the answers",
                     element: {
-                        tag: "input",
+                        title: "Get a copy of the answers",
                         type: "checkbox",
                         name: "copy",
-                        // placeholder: "Answer"??
                     }
                 }
 
@@ -204,30 +179,26 @@ const formData = {
             subtitle: "Other service",
             form: [
                 {
-                    title: "Describe the requirements ",
                     element: {
-                        tag: "input",
+                        title: "Describe the requirements ",
                         type: "text",
                         name: "Describe the requirements",
                         placeholder: "Answer"
                     }
                 },
                 {
-                    title: "Do you have a budget for this service, if so, please specify the range",
                     element: {
-                        tag: "input",
+                        title: "Do you have a budget for this service, if so, please specify the range",
                         type: "text",
                         name: "Do you have a budget for this service, if so, please specify the range",
                         placeholder: "Answer"
                     }
                 },
                 {
-                    title: "Get a copy of the answers",
                     element: {
-                        tag: "input",
+                        title: "Get a copy of the answers",
                         type: "checkbox",
                         name: "copy",
-                        // placeholder: "Answer"??
                     }
                 }
 
@@ -237,12 +208,20 @@ const formData = {
 
     ],
     footer: {
-        buttons: {
-            next: "Next",
-            back: "Back",
-            clear: "Clear Form",
-            submit: "Submit"
-        }
+        mainText: "© 2022 Xarial Pty Limited. All rights reserved.",
+        mailLink: "info@xarial.com",
+        phoneLink: "+61 435 577 927",
+        address: "PO BOX 1163, Dee Why, NSW, 2099",
+        abn: "46 638 294 649",
+        termsLink: "https://xarial.com/terms-of-use/",
+        privacyLink: "https://xarial.com/privacy-policy/",
+        cookiesLink: "https://xarial.com/cookies-policy/"
+    },
+    buttons: {
+        next: "Next",
+        back: "Back",
+        clear: "Clear Form",
+        submit: "Submit"
     },
     modal: {
         title: "Xarial Development Services Quote",
