@@ -237,18 +237,23 @@ dialog {
 }
 
 @media (max-width: 767px) {
-    .js-form {
+    .edit__form {
         width: 100%;
     }
 
-    .input {
+    .block__input {
         width: 100%;
     }
-
-    .final-step {
-        width: 90%;
+    .group__radio__block{
+        justify-content: space-between;
+        font-size: 14px;
     }
-
+    .group__radio__block img{
+      align-self: flex-start;
+    }
+    .block__radio__label{
+        margin: 0;
+    }
     h1 {
         font-size: 20px;
     }
