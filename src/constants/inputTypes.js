@@ -5,7 +5,4 @@ export let inputTypes = [
     "number",
     "password",
     "date",
-    "radio",
-    "checkbox",
-
 ]

@@ -1,28 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../components/header/header";
+import EditInput from "../../components/editInput/editInput";
+import EditInputsRadio from "../../components/editInputRadio/editInputsRadio";
 import {baseUrl} from "../../constants/api";
 
 import "./editFrom.css"
-import {mockData} from "../../constants/mockForm"
-import plus from "../../assets/icons/addIcon.png"
-import del from "../../assets/icons/removeIcon.png"
-import {inputTypes} from "../../constants/inputTypes";
+
+import plus from "../../assets/icons/add.svg"
 
 const EditFrom = () => {
-    const [state, setState] = useState(mockData)
+
+    const [state, setState] = useState([])
     const [loading, setLoading] = useState(false)
-    // console.log(JSON.stringify(mockData))
-    // useEffect(() => {
-    //     setLoading(true)
-    //
-    //     fetch(`${baseUrl}/form`).then((res) => res.json()).then((res2) => setState(res2))
-    //     setTimeout(() => {
-    //         setLoading(false)
-    //     }, 1500)
-    // }, [])
 
-
-    console.log(state)
+    useEffect(() => {
+        setLoading(true)
+        fetch(`${baseUrl}/form`).then((res) => res.json()).then((res2) => setState(res2))
+        setTimeout(() => {
+            setLoading(false)
+        }, 1500)
+    }, [])
 
     const handleChangeInput = (e, a, b) => {
         e.stopPropagation()
@@ -39,18 +36,19 @@ const EditFrom = () => {
                 return form
             }
         })
-        const body = state.body.map((item, index) => {
+
+        const newBody = state.body.map((item, index) => {
             if (index === a) {
                 return {...item, form: newArr}
             } else {
                 return item
             }
         })
-        setState({...state, body})
 
+        setState(prev => ({...prev, body: newBody}))
     }
 
-    const handleChangeInputTitle = async (e, a, b) => {
+    const handleChangeInputTitle = (e, a, b) => {
         e.stopPropagation()
         e.preventDefault()
 
@@ -64,7 +62,7 @@ const EditFrom = () => {
             }
         })
 
-        const body = state.body.map((item, index) => {
+        const newBody = state.body.map((item, index) => {
             if (index === a) {
                 return {...item, form: arr}
             } else {
@@ -72,8 +70,7 @@ const EditFrom = () => {
             }
         })
 
-        setState({...state, body})
-
+        setState(prev => ({...prev, body: newBody}))
     }
 
     const addRadioButton = (a, b) => {
@@ -102,8 +99,8 @@ const EditFrom = () => {
                 return item
             }
         })
-        setState({...state, body: newBody})
 
+        setState(prev => ({...prev, body: newBody}))
     }
 
     const addInputToForm = (a) => {
@@ -114,9 +111,12 @@ const EditFrom = () => {
                 placeholder: "",
             }
         }
-        const addInput = state.body[a].form.concat(obj)
 
-        const body = state.body.map((item, index) => {
+        const lastItem = state.body[a].form.pop()
+
+        const addInput = state.body[a].form.concat(obj, lastItem)
+
+        const newBody = state.body.map((item, index) => {
             if (index === a) {
                 return {...item, form: addInput}
             } else {
@@ -124,7 +124,7 @@ const EditFrom = () => {
             }
         })
 
-        setState({...state, body})
+        setState(prev => ({...prev, body: newBody}))
     }
 
     const addInputsToForm = (a) => {
@@ -139,9 +139,12 @@ const EditFrom = () => {
                 }
             ]
         }
-        const addInputs = state.body[a].form.concat(obj)
 
-        const body = state.body.map((item, index) => {
+        const lastItem = state.body[a].form.pop()
+
+        const addInputs = state.body[a].form.concat(obj, lastItem)
+
+        const newBody = state.body.map((item, index) => {
             if (index === a) {
                 return {...item, form: addInputs}
             } else {
@@ -149,12 +152,11 @@ const EditFrom = () => {
             }
         })
 
-        setState({...state, body})
-
+        setState((prev) => ({...prev, body: newBody}))
     }
 
+    const handleInputChangeRadio = (e, a, b, c) => {
 
-    const handleInputChangeRadio = async (e, a, b, c) => {
         const element = {...state.body[a].form[b].elements[c], [e.target.name]: e.target.value}
 
         const elements = state.body[a].form[b].elements.map((el, index) => {
@@ -182,11 +184,12 @@ const EditFrom = () => {
                 return item
             }
         })
-        setState({...state, body: newBody})
 
+        setState(prevState => ({...prevState, body: newBody}))
     }
 
     const removeInput = (a, b) => {
+
         const newFrom = state.body[a].form.filter((_, i) => i !== b)
 
         const newBody = state.body.map((item, index) => {
@@ -196,7 +199,8 @@ const EditFrom = () => {
                 return item
             }
         })
-        setState({...state, body: newBody})
+
+        setState(prev => ({...prev, body: newBody}))
     }
 
     const removeRadioButton = (a, b, c) => {
@@ -219,27 +223,28 @@ const EditFrom = () => {
                 return item
             }
         })
-        console.log(newBody)
-        setState({...state, body: newBody})
+
+        setState(prev => ({...prev, body: newBody}))
 
     }
-
-    const removeRadioButtonGroup = (a, b) => {
-
-    }
-
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
         const res = await fetch(`http://localhost:8080/form`, {
             method: 'PUT',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(state)
         });
+
         const data = await res.json()
         setState(data)
-    }
 
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
 
     return (
         <>
@@ -250,116 +255,25 @@ const EditFrom = () => {
                         <div className="form__group__header">
                             <h1>{state?.header?.title}</h1>
                         </div>
-
                         {state?.body?.map((data, index) => {
                             return <div key={index} className="form__body">
                                 {data.subtitle !== undefined && <h3 className={"subheader"}>{data?.subtitle}</h3>}
                                 {data.form.map((item, index1) => {
                                     return item.element ?
-                                        <div className={"body__group"} key={`${index1}`}>
-                                            <img
-                                                className={"group__remove"}
-                                                src={del} alt={"delete"}
-                                                onClick={() => removeInput(index, index1)}/>
-                                            <div className={"group__input__block"}>
-                                                <p className={"block__p"}>Edit input title</p>
-                                                <input className={"block__input"} defaultValue={item.element.title}
-                                                       onChange={(e) => handleChangeInput(e, index, index1)}
-                                                       name={"title"}/>
-                                            </div>
-                                            <div className={"group__input__block"}>
-                                                <p className={"block__p"}>Edit input type</p>
-                                                <select className={"block__select"}
-                                                        onChange={(e) => handleChangeInput(e, index, index1)}
-                                                        name={"type"} defaultValue={item.element.type}>
-                                                    {inputTypes.map(((type, i) => {
-                                                            return <option key={`${i}`} value={type}>{type}</option>
-                                                        }
-                                                    ))}
-                                                </select>
-                                            </div>
-                                            <div className={"group__input__block"}>
-                                                <p className={"block__p"}>Edit input placeholder</p>
-                                                <input className={"block__input"}
-                                                       defaultValue={item.element.placeholder}
-                                                       onChange={(e) => handleChangeInput(e, index, index1)}
-                                                       name={"placeholder"}/>
-                                            </div>
-                                            <div className={"group__input__block"}>
-                                                <p className={"block__p"}>Edit input name</p>
-                                                <input className={"block__input"} defaultValue={item.element.name}
-                                                       onChange={(e) => handleChangeInput(e, index, index1)}
-                                                       name={"name"}/>
-                                            </div>
-                                            <input type={`${item.element.type}`}
-                                                   className={"block__result"}
-                                                   name={`${item.element.name}`}
-                                                   placeholder={`${item.element.placeholder}`}/>
-
-
-                                        </div>
+                                        <EditInput key={`${Math.random() + index + index1}`}
+                                                   item={item}
+                                                   remove={() => removeInput(index, index1)}
+                                                   onChangeInput={(e) => handleChangeInput(e, index, index1)}/>
                                         :
-                                        <div className={"body__group"} key={`${index1}`}>
-                                            <div className={"group__radio__header"}>
-                                                <input className={"block__input"} value={item.title}
-                                                       onChange={(e) => handleChangeInputTitle(e, index, index1)}/>
-                                                <img
-                                                    className={"group__remove"}
-                                                    src={del} alt={"delete"}
-                                                    onClick={() => removeInput(index, index1)}/>
-                                            </div>
-
-                                            {item?.elements.map((btn, index2) => {
-                                                return <div key={`${index2}`} className={"body__group"}>
-                                                    <div className={"group__radio__block"}>
-                                                                <span className={"block__radio__span"}>
-                                                            <label className={"block__radio__label"}
-                                                                   htmlFor={btn.value}>{
-                                                                btn.label
-                                                            }
-                                                                <input type={btn.type}
-                                                                       name={btn.name}
-                                                                       value={btn.value}
-                                                                       id={btn.value}/>
-                                                            </label>
-
-                                                        </span>
-                                                        <img src={del}
-                                                             className={"group__remove"}
-                                                             alt={"delete"}
-                                                             onClick={() => removeRadioButton(index, index1, index2)}/>
-                                                    </div>
-
-                                                    <div className={"group__input__block"}>
-                                                        <p className={"block__p"}>Edit input label</p>
-                                                        <input className={"block__input"}
-                                                               defaultValue={btn.label}
-                                                               onChange={(e) => handleInputChangeRadio(e, index, index1, index2)}
-                                                               name={"label"}/>
-                                                    </div>
-                                                    <div className={"group__input__block"}>
-                                                        <p className={"block__p"}>Edit input value</p>
-                                                        <input className={"block__input"}
-                                                               defaultValue={btn.value}
-                                                               onChange={(e) => handleInputChangeRadio(e, index, index1, index2)}
-                                                               name={"value"}/>
-                                                    </div>
-                                                    <div className={"group__input__block"}>
-                                                        <p className={"block__p"}>Edit input name</p>
-                                                        <input className={"block__input"}
-                                                               defaultValue={btn.name}
-                                                               onChange={(e) => handleInputChangeRadio(e, index, index1, index2)}
-                                                               name={"name"}/>
-                                                    </div>
-                                                </div>
-                                            })}
-                                            <div className={"add__block"}>
-                                                <img className={"add__block__plus"}
-                                                     src={plus} alt={"plus"}
-                                                     onClick={() => addRadioButton(index, index1)}/>
-                                                <p className={"add__block__p"}>Add radio button</p>
-                                            </div>
-                                        </div>
+                                        <EditInputsRadio key={`${Math.random() + index + index1}`}
+                                                         item={item} index={index}
+                                                         index1={index1}
+                                                         addRadioButton={addRadioButton}
+                                                         handleChangeInputTitle={handleChangeInputTitle}
+                                                         handleInputChangeRadio={handleInputChangeRadio}
+                                                         removeRadioButton={removeRadioButton}
+                                                         removeInput={removeInput}
+                                        />
                                 })}
                                 <div className={"add__block"}>
                                     <img src={plus} alt={"plus"}
