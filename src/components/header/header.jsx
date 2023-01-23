@@ -1,9 +1,10 @@
 import React from 'react';
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {token, role} from "../../constants/storageKey";
 
 import "./header.css"
 
+import logo from "../../assets/icons/xarial-icon.svg"
 
 const Header = () => {
     const navigate = useNavigate()
@@ -33,10 +34,11 @@ const Header = () => {
 
     return (
         <header className={"header"}>
-            <div className={"logo"}>
-                <p className={"goHome"} onClick={goHome}>Xarial CMS</p>
+            <div className={"header__logo"}>
+                <img className={"logo"} src={logo} alt={"logo"}/>
+                <p className={"header__goHome"} onClick={goHome}>Xarial CMS</p>
             </div>
-            <div className={"links"}>
+            <div className={"header__links"}>
                 {(admin && location.pathname !== "/admin") &&
                     <button className={"link"} onClick={toAdmin}>Admin</button>}
                 {location.pathname === "/admin" &&
