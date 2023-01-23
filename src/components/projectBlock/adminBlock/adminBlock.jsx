@@ -1,21 +1,21 @@
-import React from 'react';
-import {useNavigate} from "react-router";
+import React from "react";
+import { useNavigate } from "react-router";
 
+import "./adminBlock.css";
 
-import "./adminBlock.css"
+const AdminBlock = ({ item }) => {
+  const navigate = useNavigate();
+  const openItem = (name) => navigate(`/admin/contract/${name}`);
 
-const AdminBlock = ({item}) => {
-    const navigate = useNavigate();
-    const openItem = (name) => navigate(`/admin/contract/${name}`)
-
-
-    return (
-        <div className={"adminBlock"}>
-            <p>{item.project_number}</p>
-            <p>{item.status}</p>
-            <button onClick={() => openItem(item.project_number)} className={"btn"}>Edit</button>
-        </div>
-    );
+  return (
+    <div className={"adminBlock"}>
+      <p>{item.project_number}</p>
+      <p>{item.status}</p>
+      <button onClick={() => openItem(item.project_number)} className={"btn"}>
+        Edit
+      </button>
+    </div>
+  );
 };
 
 export default AdminBlock;

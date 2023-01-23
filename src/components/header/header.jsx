@@ -4,7 +4,7 @@ import {token, role} from "../../constants/storageKey";
 
 import "./header.css"
 
-import logo from "../../assets/icons/xarial-icon.svg"
+import logo from "../../assets/logo/xarial-icon.svg"
 
 const Header = () => {
     const navigate = useNavigate()
@@ -34,18 +34,18 @@ const Header = () => {
 
     return (
         <header className={"header"}>
-            <div className={"header__logo"}>
-                <img className={"logo"} src={logo} alt={"logo"}/>
-                <p className={"header__goHome"} onClick={goHome}>Xarial CMS</p>
+            <div className={"header__block"}>
+                <img className={"block__logo"} src={logo} alt={"logo"}/>
+                <p className={"block__home"} onClick={goHome}>Xarial CMS</p>
             </div>
-            <div className={"header__links"}>
+            <div className={"header__block__links"}>
                 {(admin && location.pathname !== "/admin") &&
-                    <button className={"link"} onClick={toAdmin}>Admin</button>}
+                    <button className={"links__link"} onClick={toAdmin}>Admin</button>}
                 {location.pathname === "/admin" &&
-                    <button className={"link"} onClick={toEditStatus}>Edit status</button>}
-                {location.pathname === "/admin" && <button className={"link"} onClick={toEditForm}>Edit form</button>}
-                {auth ? <button onClick={logOut} className={"btn"}>Log out</button> :
-                    <button onClick={singIn} className={"btn"}>Sing in</button>}
+                    <button className={"links__link"} onClick={toEditStatus}>Edit status</button>}
+                {location.pathname === "/admin" && <button className={"links__link"} onClick={toEditForm}>Edit form</button>}
+                {auth ? <button onClick={logOut} className={"links__button"}>Log out</button> :
+                    <button onClick={singIn} className={"links__button"}>Sing in</button>}
             </div>
         </header>
     );

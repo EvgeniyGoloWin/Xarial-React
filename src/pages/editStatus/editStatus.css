@@ -1,9 +1,29 @@
-.editPage {
+.edit__status {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
     flex-direction: column;
+}
+
+.edit__status__add {
+    display: flex;
+    justify-content: space-between;
+    min-width: 320px;
+}
+
+.add__input__status {
+    background: #EDF2F7;
+    border-radius: 5px;
+    padding: 15px;
+    min-width: 230px;
+    border: none;
+}
+
+.edit__status__section__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .status {
@@ -15,26 +35,6 @@
     padding: 10px;
     margin: 5px 0;
     min-width: 300px;
-}
-
-.section_btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.add_status {
-    display: flex;
-    justify-content: space-between;
-    min-width: 320px;
-}
-
-.input_status {
-    background: #EDF2F7;
-    border-radius: 5px;
-    padding: 15px;
-    min-width: 230px;
-    border: none;
 }
 
 .edit_icon {
