@@ -1,8 +1,1 @@
-export let inputTypes = [
-    "text",
-    "email",
-    "tel",
-    "number",
-    "password",
-    "date",
-]
+export let inputTypes = ["text", "email", "tel", "number", "password", "date"];

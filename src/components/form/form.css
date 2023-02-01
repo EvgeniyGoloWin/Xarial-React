@@ -1,19 +1,28 @@
-.form {
+.registration__form {
     background-color: white;
     padding: 38px;
     border-radius: 10px;
 }
 
-.form_group {
+.form__block {
     display: flex;
     flex-direction: column;
 }
 
-.label {
+.form__block__label {
     margin: 10px 0;
 }
 
-.form_btn {
+.form__block__input {
+    background: #EDF2F7;
+    border-radius: 5px;
+    padding: 15px;
+    min-width: 300px;
+    margin-right: 10px;
+    border: none;
+}
+
+.registration__form__buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,18 +30,18 @@
     height: 40px;
 }
 
-.btn_forgot {
+.buttons__forgot {
     border: none;
     background: transparent;
     color: rgba(49, 130, 206, 1);
     font-size: 20px;
 }
 
-.btn_forgot:hover {
+.buttons__forgot:hover {
     cursor: pointer;
 }
 
-.btn_singIn {
+.buttons_singIn {
     background: #2A4365;
     color: white;
     font-size: 18px;
@@ -41,8 +50,7 @@
     padding: 5px 10px;
 }
 
-.btn_singIn:hover {
-    /*box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);*/
+.buttons_singIn:hover {
     background-color: white;
     color: black;
     cursor: pointer;

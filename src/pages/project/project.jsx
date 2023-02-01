@@ -1,54 +1,66 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
+import { baseUrl } from "../../constants/api";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 import Header from "../../components/header/header";
-import {token} from "../../constants/storageKey";
-import {baseUrl} from "../../constants/api";
-import {useParams} from "react-router";
+import Loader from "../../components/loader/loader";
 
-
-import "./project.css"
-import {useNavigate} from "react-router-dom";
-
+import "./project.css";
 
 const Project = () => {
-    const {number} = useParams()
-    const navigate = useNavigate()
-    const [project, setProject] = useState(null)
-    const [loading, setLoading] = useState(false)
+  const { number } = useParams();
+  const navigate = useNavigate();
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-    const isAuth = sessionStorage.getItem(token)
-    console.log(Boolean(isAuth))
-    useEffect(() => {
-        setLoading(true)
-        fetch(`${baseUrl}/doc/${number}`).then((res) => res.json()).then(res => setProject(res))
-        setTimeout(() => setLoading(false), 1500)
-    }, [number])
+  useEffect(() => {
+    setLoading(true);
+    axios.get(`${baseUrl}/doc/${number}`).then((res) => setProject(res.data));
+    setTimeout(() => setLoading(false), 1500);
+  }, [number]);
 
-    const onClickBackHome = () => navigate('/')
+  const onClickBackHome = () => navigate("/");
 
-    return (
-        <>
-            <Header/>
-            {loading ? <p className={"loader"}>Data is loading...</p> : <div className={"user"}>
-                <div className="sub-header">
-                    <button className="sub-header-button_back" onClick={onClickBackHome}>&#8592; back</button>
-                </div>
-                <p className={"project"}>
-                    <b>Your project number is</b> : {project?.project_number}
-                </p>
-                <p className={"project"}>
-                    <b>Your project status</b> : {project?.status}
-                </p>
+  return (
+    <>
+      <Header />
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className={"project"}>
+          <div className="sub__header">
+            <button
+              className="sub__header__button__back"
+              onClick={onClickBackHome}
+            >
+              &#8592; back
+            </button>
+          </div>
+          <p className={"project__p"}>
+            <b>Your project number is</b> : {project?.project_number}
+          </p>
+          <p className={"project__p"}>
+            <b>Your project status</b> : {project?.status}
+          </p>
 
-               <div>
-                    {
-                        project?.docs.map((item, index) =>
-                            <a className={"doc"} href={`https://test-nscu.onrender.com/${item}`} target="_blank"
-                               rel="noreferrer">doc {index + 1}</a> )
-                    }
-               </div>
-            </div>}
-        </>
-    );
+          <div>
+            {project?.docs.map((item, index) => (
+              <a
+                className={"project__doc"}
+                href={`https://test-nscu.onrender.com/${item}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                doc {index + 1}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default Project;

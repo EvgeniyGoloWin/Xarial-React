@@ -1,5 +1,6 @@
 import React from 'react';
 import {inputTypes} from "../../constants/inputTypes";
+
 import del from "../../assets/icons/delete.svg";
 
 

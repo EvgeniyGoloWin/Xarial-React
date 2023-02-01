@@ -1,80 +1,100 @@
-import React, {useState} from 'react';
-import {useNavigate, useLocation} from "react-router-dom";
-import {baseUrl} from "../../constants/api";
-import {role, token} from "../../constants/storageKey";
-import {useDispatch} from "react-redux";
-import {setUser} from "../../store/slice/userSlice";
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { baseUrl } from "../../constants/api";
+import { role, token } from "../../constants/storageKey";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/slice/userSlice";
+import axios from "axios";
 
-
-import "./form.css"
-
+import "./form.css";
 
 const Form = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const location = useLocation()
-    const page = location.pathname === '/login'
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const page = location.pathname === "/login";
 
+  const [formState, setFormState] = useState({
+    email: "",
+    password: "",
+  });
 
-    const [formState, setFormState] = useState({
-        email: "",
-        password: ''
-    })
+  const handleSubmitLogin = async (e) => {
+    e.preventDefault();
 
-    const handleSubmitLogin = async (e) => {
-        e.preventDefault()
-        const formData = new FormData()
-        formData.append('email', `${formState.email}`)
-        formData.append('password', `${formState.password}`)
-        const res = await fetch(`${baseUrl}/user/login`, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            body: formData // body data type must match "Content-Type" header
-        });
-        const data = await res.json()
-        if (data.token) sessionStorage.setItem(token, data.token)
-        if (data.token) sessionStorage.setItem(role, data.role)
-        dispatch(setUser(data))
-        data.role === "user" ? navigate("/project") : navigate("/admin")
-    }
+    const res = await axios.post(`${baseUrl}/user/login`, formState);
+    const data = await res.data;
 
-    const handleSubmitRegister = async (e) => {
-        e.preventDefault()
-        const formData = new FormData()
-        formData.append('email', `${formState.email}`)
-        formData.append('password', `${formState.password}`)
-        const res = await fetch(`${baseUrl}/user/register`, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            body: formData // body data type must match "Content-Type" header
-        });
-        console.log(res.json())
-    }
+    if (data.token) sessionStorage.setItem(token, data.token);
+    if (data.token) sessionStorage.setItem(role, data.role);
+    dispatch(setUser(data));
+    data.role === "user" ? navigate("/") : navigate("/admin");
+  };
 
-    const handleOnChange = (e) => {
-        setFormState({...formState, [e.target.name]: e.target.value})
-    }
+  const handleSubmitRegister = async (e) => {
+    e.preventDefault();
 
-    const register = () => {
-        navigate('/registration')
-    }
+    await axios.post(`${baseUrl}/user/register`, formState);
+    navigate("/login");
+  };
 
-    return (
-        <form className={"form"} onSubmit={page ? handleSubmitLogin : handleSubmitRegister}>
-            <div className={"form_group"}>
-                <label htmlFor={"email"} className={"label"}>Email address</label>
-                <input id={"email"} className={"input"} type="text" name={"email"} value={formState.email}
-                       onChange={(event => handleOnChange(event))} required/>
-            </div>
-            <div className={"form_group"}>
-                <label htmlFor={"password"} className={"label"}>Password</label>
-                <input id={"password"} className={"input"} type="password" name={"password"} value={formState.password}
-                       onChange={(event => handleOnChange(event))} required/>
-            </div>
-            <div className='form_btn'>
-                {page && <button className='btn_forgot' type={"button"} onClick={register}> Registration</button>}
-                <button className='btn_singIn' type={"submit"}>{page ? 'Sing in' : 'Registration'}</button>
-            </div>
-        </form>
-    );
+  const handleOnChange = (e) => {
+    setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
+
+  const register = () => {
+    navigate("/registration");
+  };
+
+  return (
+    <form
+      className={"registration__form"}
+      onSubmit={page ? handleSubmitLogin : handleSubmitRegister}
+    >
+      <div className={"form__block"}>
+        <label htmlFor={"email"} className={"form__block__label"}>
+          Email address
+        </label>
+        <input
+          id={"email"}
+          className={"form__block__input"}
+          type="text"
+          name={"email"}
+          value={formState.email}
+          onChange={(event) => handleOnChange(event)}
+          required={true}
+        />
+      </div>
+      <div className={"form__block"}>
+        <label htmlFor={"password"} className={"form__block__label"}>
+          Password
+        </label>
+        <input
+          id={"password"}
+          className={"form__block__input"}
+          type="password"
+          name={"password"}
+          value={formState.password}
+          onChange={(event) => handleOnChange(event)}
+          required={true}
+        />
+      </div>
+      <div className={"registration__form__buttons"}>
+        {page && (
+          <button
+            className={"buttons__forgot"}
+            type={"button"}
+            onClick={register}
+          >
+            Registration
+          </button>
+        )}
+        <button className={"buttons_singIn"} type={"submit"}>
+          {page ? "Sing in" : "Registration"}
+        </button>
+      </div>
+    </form>
+  );
 };
 
 export default Form;

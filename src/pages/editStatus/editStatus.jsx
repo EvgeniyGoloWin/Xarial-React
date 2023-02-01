@@ -1,73 +1,77 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import Header from "../../components/header/header";
-import {baseUrl} from "../../constants/api";
+import { baseUrl } from "../../constants/api";
 import EditStatusItem from "./editStatusItem";
+import Button from "../../components/button/button";
+import axios from "axios";
 
-import './editStatus.css'
+import "./editStatus.css";
 
 const EditStatus = () => {
-    const inputRef = useRef(null)
-    const [state, setState] = useState([])
+  const inputRef = useRef(null);
+  const [status, setStatus] = useState([]);
 
-    useEffect(() => {
-        fetch(`${baseUrl}/status`)
-            .then(res => res.json())
-            .then((res) => {
-                setState(res)
-            })
-    }, [])
+  useEffect(() => {
+    axios.get(`${baseUrl}/status`).then((res) => setStatus(res.data));
+  }, []);
 
-    const handleClickRemove = (name) => {
-        const arr = state.filter((item) => item !== name)
-        setState(arr)
-    }
+  const handleClickRemove = (name) => {
+    const arr = status.filter((item) => item !== name);
+    setStatus(arr);
+  };
 
-    const handleClickUpdate = (index, text) => {
-        const updateText = state.map((item, i) => {
-            if (index === i) {
-                return text
-            } else {
-                return item
-            }
-        })
-        setState(updateText)
-    }
+  const handleClickUpdate = (index, text) => {
+    const updateText = status.map((item, i) => {
+      if (index === i) {
+        return text;
+      } else {
+        return item;
+      }
+    });
+    setStatus(updateText);
+  };
 
-    const handleClickAdd = () => {
-        setState([...state, inputRef.current.value])
-        inputRef.current.value = ''
-    }
+  const handleClickAdd = () => {
+    setStatus([...status, inputRef.current.value]);
+    inputRef.current.value = "";
+  };
 
-    const handleClickSave = async () => {
+  const handleClickSave = async () => {
+    const res = await fetch(`${baseUrl}/status`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(status),
+    });
 
-        const res = await fetch(`${baseUrl}/status`, {
-            method: 'PUT',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(state)
-        });
+    const data = await res.json();
+    setStatus(data);
+  };
 
-        const data = await res.json()
-        setState(data)
-    }
-
-    return (
-        <>
-            <Header/>
-            <div className="editPage">
-                <div className="add_status">
-                    <input className="input_status" ref={inputRef}/>
-                    <button className="btn" onClick={handleClickAdd}>Add</button>
-                </div>
-                {state.length && state?.map((item, index) => {
-                    return <EditStatusItem key={index} item={item} index={index} handleClickUpdate={handleClickUpdate}
-                                           handleClickRemove={handleClickRemove}/>
-                })}
-                <div className='section_btn'>
-                    <button type="button" onClick={handleClickSave} className="btn">Save</button>
-                </div>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <Header />
+      <div className={"edit__status"}>
+        <div className={"edit__status__add"}>
+          <input className={"add__input__status"} ref={inputRef} />
+          <Button type={"button"} content={"Add"} onClick={handleClickAdd} />
+        </div>
+        {status.length &&
+          status?.map((item, index) => {
+            return (
+              <EditStatusItem
+                key={item}
+                item={item}
+                index={index}
+                handleClickUpdate={handleClickUpdate}
+                handleClickRemove={handleClickRemove}
+              />
+            );
+          })}
+        <div className={"edit__status__section__button"}>
+          <Button type={"button"} onClick={handleClickSave} content={"Save"} />
+        </div>
+      </div>
+    </>
+  );
 };
-
 export default EditStatus;
