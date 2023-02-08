@@ -260,26 +260,28 @@ export const EditForm = () => {
         <div className="form__group__header">
           <h1>{state?.header?.title}</h1>
         </div>
-        {state?.body?.map((data, index) => {
+        {state?.body?.map((data, formIndex) => {
           return (
             <div key={index} className="form__body">
               {data.subtitle !== undefined && (
                 <h3 className={"subheader"}>{data?.subtitle}</h3>
               )}
-              {data.form.map((item, index1) => {
+              {data.form.map((item, formItemIndex) => {
                 return item.element ? (
                   <EditInput
-                    key={`${Math.random() + index + index1}`}
+                    key={`${Math.random() + formIndex + formItemIndex}`}
                     item={item}
-                    remove={() => removeInput(index, index1)}
-                    onChangeInput={(e) => handleChangeInput(e, index, index1)}
+                    remove={() => removeInput(formIndex, formItemIndex)}
+                    onChangeInput={(e) =>
+                      handleChangeInput(e, formIndex, formItemIndex)
+                    }
                   />
                 ) : (
                   <EditInputsRadio
-                    key={`${Math.random() + index + index1}`}
+                    key={`${Math.random() + formIndex + formItemIndex}`}
                     item={item}
-                    index={index}
-                    index1={index1}
+                    index={formIndex}
+                    index1={formItemIndex}
                     addRadioButton={addRadioButton}
                     handleChangeInputTitle={handleChangeInputTitle}
                     handleInputChangeRadio={handleInputChangeRadio}
@@ -293,7 +295,7 @@ export const EditForm = () => {
                   src={plus}
                   alt={"plus"}
                   className={"add__block__plus"}
-                  onClick={() => addInputToForm(index)}
+                  onClick={() => addInputToForm(formIndex)}
                 />
                 <p className={"add__block__p"}>Add input</p>
 
@@ -301,7 +303,7 @@ export const EditForm = () => {
                   src={plus}
                   alt={"plus"}
                   className={"add__block__plus"}
-                  onClick={() => addInputsToForm(index)}
+                  onClick={() => addInputsToForm(formIndex)}
                 />
                 <p className={"add__block__p"}>Add input radio</p>
               </div>
