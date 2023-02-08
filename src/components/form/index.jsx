@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+
+import axios from "axios";
+
 import { baseUrl } from "../../constants/api";
 import { role, token } from "../../constants/storageKey";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../store/slice/userSlice";
-import axios from "axios";
 
 import "./form.css";
 
-const Form = () => {
-  const dispatch = useDispatch();
+export const Form = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const page = location.pathname === "/login";
@@ -27,7 +26,7 @@ const Form = () => {
 
     if (data.token) sessionStorage.setItem(token, data.token);
     if (data.token) sessionStorage.setItem(role, data.role);
-    dispatch(setUser(data));
+
     data.role === "user" ? navigate("/") : navigate("/admin");
   };
 
@@ -42,7 +41,7 @@ const Form = () => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  const register = () => {
+  const toRegister = () => {
     navigate("/registration");
   };
 
@@ -84,7 +83,7 @@ const Form = () => {
           <button
             className={"buttons__forgot"}
             type={"button"}
-            onClick={register}
+            onClick={toRegister}
           >
             Registration
           </button>
@@ -96,5 +95,3 @@ const Form = () => {
     </form>
   );
 };
-
-export default Form;

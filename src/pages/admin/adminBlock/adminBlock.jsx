@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 
 import "./adminBlock.css";
+import { Button } from "../../../components";
 
 const AdminBlock = ({ item }) => {
   const navigate = useNavigate();
@@ -11,9 +12,7 @@ const AdminBlock = ({ item }) => {
     <div className={"adminBlock"}>
       <p>{item.project_number}</p>
       <p>{item.status}</p>
-      <button onClick={() => openItem(item.project_number)} className={"btn"}>
-        Edit
-      </button>
+      <Button onClick={() => openItem(item.project_number)} content={"Edit"} />
     </div>
   );
 };

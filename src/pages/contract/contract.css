@@ -114,6 +114,12 @@
     text-overflow: ellipsis;
 }
 
+.file__remove {
+    outline: none;
+    border: none;
+    color: red;
+}
+
 .file__remove:hover {
     cursor: pointer;
 }

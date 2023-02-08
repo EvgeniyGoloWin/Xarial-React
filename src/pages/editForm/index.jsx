@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/header/header";
-import EditInput from "../../components/editInput/editInput";
-import EditInputsRadio from "../../components/editInputRadio/editInputsRadio";
+import axios from "axios";
+
+import { Button } from "../../components";
+import EditInput from "./editInput/editInput";
+import EditInputsRadio from "./editInputRadio/editInputsRadio";
 import { baseUrl } from "../../constants/api";
+
+import plus from "../../assets/icons/add.svg";
 
 import "./editFrom.css";
 
-import plus from "../../assets/icons/add.svg";
-import axios from "axios";
-import Button from "../../components/button/button";
-
-const EditFrom = () => {
+export const EditForm = () => {
   const [state, setState] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -252,74 +252,65 @@ const EditFrom = () => {
     });
   };
 
-  return (
-    <>
-      <Header />
-      {loading ? (
-        <p>data is loading</p>
-      ) : (
-        <div className={"page"}>
-          <form className="edit__form" onSubmit={(e) => handleSubmit(e)}>
-            <div className="form__group__header">
-              <h1>{state?.header?.title}</h1>
-            </div>
-            {state?.body?.map((data, index) => {
-              return (
-                <div key={index} className="form__body">
-                  {data.subtitle !== undefined && (
-                    <h3 className={"subheader"}>{data?.subtitle}</h3>
-                  )}
-                  {data.form.map((item, index1) => {
-                    return item.element ? (
-                      <EditInput
-                        key={`${Math.random() + index + index1}`}
-                        item={item}
-                        remove={() => removeInput(index, index1)}
-                        onChangeInput={(e) =>
-                          handleChangeInput(e, index, index1)
-                        }
-                      />
-                    ) : (
-                      <EditInputsRadio
-                        key={`${Math.random() + index + index1}`}
-                        item={item}
-                        index={index}
-                        index1={index1}
-                        addRadioButton={addRadioButton}
-                        handleChangeInputTitle={handleChangeInputTitle}
-                        handleInputChangeRadio={handleInputChangeRadio}
-                        removeRadioButton={removeRadioButton}
-                        removeInput={removeInput}
-                      />
-                    );
-                  })}
-                  <div className={"add__block"}>
-                    <img
-                      src={plus}
-                      alt={"plus"}
-                      className={"add__block__plus"}
-                      onClick={() => addInputToForm(index)}
-                    />
-                    <p className={"add__block__p"}>Add input</p>
-
-                    <img
-                      src={plus}
-                      alt={"plus"}
-                      className={"add__block__plus"}
-                      onClick={() => addInputsToForm(index)}
-                    />
-                    <p className={"add__block__p"}>Add input radio</p>
-                  </div>
-                </div>
-              );
-            })}
-
-            <Button type={"submit"} content={"Save"} />
-          </form>
+  return loading ? (
+    <p>data is loading</p>
+  ) : (
+    <div className={"page"}>
+      <form className="edit__form" onSubmit={(e) => handleSubmit(e)}>
+        <div className="form__group__header">
+          <h1>{state?.header?.title}</h1>
         </div>
-      )}
-    </>
+        {state?.body?.map((data, index) => {
+          return (
+            <div key={index} className="form__body">
+              {data.subtitle !== undefined && (
+                <h3 className={"subheader"}>{data?.subtitle}</h3>
+              )}
+              {data.form.map((item, index1) => {
+                return item.element ? (
+                  <EditInput
+                    key={`${Math.random() + index + index1}`}
+                    item={item}
+                    remove={() => removeInput(index, index1)}
+                    onChangeInput={(e) => handleChangeInput(e, index, index1)}
+                  />
+                ) : (
+                  <EditInputsRadio
+                    key={`${Math.random() + index + index1}`}
+                    item={item}
+                    index={index}
+                    index1={index1}
+                    addRadioButton={addRadioButton}
+                    handleChangeInputTitle={handleChangeInputTitle}
+                    handleInputChangeRadio={handleInputChangeRadio}
+                    removeRadioButton={removeRadioButton}
+                    removeInput={removeInput}
+                  />
+                );
+              })}
+              <div className={"add__block"}>
+                <img
+                  src={plus}
+                  alt={"plus"}
+                  className={"add__block__plus"}
+                  onClick={() => addInputToForm(index)}
+                />
+                <p className={"add__block__p"}>Add input</p>
+
+                <img
+                  src={plus}
+                  alt={"plus"}
+                  className={"add__block__plus"}
+                  onClick={() => addInputsToForm(index)}
+                />
+                <p className={"add__block__p"}>Add input radio</p>
+              </div>
+            </div>
+          );
+        })}
+
+        <Button type={"submit"} content={"Save"} />
+      </form>
+    </div>
   );
 };
-
-export default EditFrom;

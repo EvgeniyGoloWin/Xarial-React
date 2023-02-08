@@ -14,11 +14,11 @@ const Block = ({ item }) => {
         return 25;
       case "Quote Accept":
         return 35;
-      case "Project in progress":
+      case "Index in progress":
         return 60;
-      case "Project delivered":
+      case "Index delivered":
         return 80;
-      case "Project Accept":
+      case "Index Accept":
         return 100;
       default:
         return 0;

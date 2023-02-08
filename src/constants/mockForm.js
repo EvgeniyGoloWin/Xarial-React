@@ -222,7 +222,7 @@ export const mockData = {
   buttons: {
     next: "Next",
     back: "Back",
-    clear: "Clear Form",
+    clear: "Clear Index",
     submit: "Submit",
   },
   modal: {

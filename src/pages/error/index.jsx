@@ -1,9 +1,9 @@
 import React from "react";
-
-import "./error.css";
 import { Link } from "react-router-dom";
 
-const ErrorPage = () => {
+import "./error.css";
+
+export const ErrorPage = () => {
   return (
     <div className={"error__page"}>
       <h1>Oops!</h1>
@@ -14,5 +14,3 @@ const ErrorPage = () => {
     </div>
   );
 };
-
-export default ErrorPage;

@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import Header from "../../components/header/header";
-import { baseUrl } from "../../constants/api";
-import EditStatusItem from "./editStatusItem";
-import Button from "../../components/button/button";
 import axios from "axios";
+
+import EditStatusItem from "./editStatusItem";
+import { Button } from "../../components";
+import { baseUrl } from "../../constants/api";
 
 import "./editStatus.css";
 
-const EditStatus = () => {
+export const EditStatus = () => {
   const inputRef = useRef(null);
   const [status, setStatus] = useState([]);
 
@@ -48,30 +48,26 @@ const EditStatus = () => {
   };
 
   return (
-    <>
-      <Header />
-      <div className={"edit__status"}>
-        <div className={"edit__status__add"}>
-          <input className={"add__input__status"} ref={inputRef} />
-          <Button type={"button"} content={"Add"} onClick={handleClickAdd} />
-        </div>
-        {status.length &&
-          status?.map((item, index) => {
-            return (
-              <EditStatusItem
-                key={item}
-                item={item}
-                index={index}
-                handleClickUpdate={handleClickUpdate}
-                handleClickRemove={handleClickRemove}
-              />
-            );
-          })}
-        <div className={"edit__status__section__button"}>
-          <Button type={"button"} onClick={handleClickSave} content={"Save"} />
-        </div>
+    <div className={"edit__status"}>
+      <div className={"edit__status__add"}>
+        <input className={"add__input__status"} ref={inputRef} />
+        <Button type={"button"} content={"Add"} onClick={handleClickAdd} />
       </div>
-    </>
+      {status.length &&
+        status?.map((item, index) => {
+          return (
+            <EditStatusItem
+              key={item}
+              item={item}
+              index={index}
+              handleClickUpdate={handleClickUpdate}
+              handleClickRemove={handleClickRemove}
+            />
+          );
+        })}
+      <div className={"edit__status__section__button"}>
+        <Button type={"button"} onClick={handleClickSave} content={"Save"} />
+      </div>
+    </div>
   );
 };
-export default EditStatus;
