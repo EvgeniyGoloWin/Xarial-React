@@ -1,9 +1,11 @@
 import React from "react";
 import { inputTypes } from "../constants/inputTypes";
 
+import { EditItem } from "../../../components";
 import del from "../../../assets/icons/delete.svg";
+import saveImg from "../../../assets/icons/ok.png";
 
-const EditInput = ({ item, remove, onChangeInput }) => {
+const EditInput = ({ item, remove, onChangeInput, save }) => {
   return (
     <div className={"body__group"}>
       <img
@@ -12,15 +14,14 @@ const EditInput = ({ item, remove, onChangeInput }) => {
         alt={"delete"}
         onClick={remove}
       />
-      <div className={"group__input__block"}>
-        <p className={"block__p"}>Edit input title</p>
-        <input
-          className={"block__input"}
-          defaultValue={item.element.title}
-          onChange={onChangeInput}
-          name={"title"}
-        />
-      </div>
+      <EditItem
+        name={"title"}
+        content={"Edit input title"}
+        value={item.element.title}
+        onChange={onChangeInput}
+        onSave={save}
+      />
+
       <div className={"group__input__block"}>
         <p className={"block__p"}>Edit input type</p>
         <select
@@ -37,25 +38,30 @@ const EditInput = ({ item, remove, onChangeInput }) => {
             );
           })}
         </select>
+        <img
+          className={"save_icon"}
+          src={saveImg}
+          alt={"save"}
+          onClick={save}
+        />
       </div>
-      <div className={"group__input__block"}>
-        <p className={"block__p"}>Edit input placeholder</p>
-        <input
-          className={"block__input"}
-          defaultValue={item.element.placeholder}
-          onChange={onChangeInput}
+      {item.element.type !== "checkbox" && (
+        <EditItem
           name={"placeholder"}
-        />
-      </div>
-      <div className={"group__input__block"}>
-        <p className={"block__p"}>Edit input name</p>
-        <input
-          className={"block__input"}
-          defaultValue={item.element.name}
           onChange={onChangeInput}
-          name={"name"}
+          onSave={save}
+          value={item.element.placeholder}
+          content={"Edit input placeholder"}
         />
-      </div>
+      )}
+      <EditItem
+        name={"name"}
+        value={item.element.name}
+        onChange={onChangeInput}
+        onSave={save}
+        content={"Edit input name"}
+      />
+
       <input
         type={`${item.element.type}`}
         className={"block__result"}

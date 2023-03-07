@@ -47,6 +47,10 @@
     height: 20px;
 }
 
+.save_icon:hover{
+    cursor: pointer;
+}
+
 .btns_icon {
     display: flex;
 }

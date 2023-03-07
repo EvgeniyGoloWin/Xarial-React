@@ -1,6 +1,8 @@
 import React from "react";
 import del from "../../../assets/icons/delete.svg";
 import plus from "../../../assets/icons/add.svg";
+import saveImg from "../../../assets/icons/ok.png";
+import { EditItem } from "../../../components";
 
 const EditInputsRadio = ({
   item,
@@ -11,15 +13,24 @@ const EditInputsRadio = ({
   removeRadioButton,
   handleInputChangeRadio,
   addRadioButton,
+  save,
 }) => {
   return (
     <div className={"body__group"}>
       <div className={"group__radio__header"}>
-        <input
-          className={"block__input"}
-          value={item.title}
-          onChange={(e) => handleChangeInputTitle(e, index, index1)}
-        />
+        <>
+          <input
+            className={"block__input"}
+            defaultValue={item.title}
+            onChange={(e) => handleChangeInputTitle(e, index, index1)}
+          />
+          <img
+            className={"save_icon"}
+            src={saveImg}
+            alt={"save"}
+            onClick={save}
+          />
+        </>
         <img
           className={"group__remove"}
           src={del}
@@ -51,42 +62,33 @@ const EditInputsRadio = ({
               />
             </div>
 
-            <div className={"group__input__block"}>
-              <p className={"block__p"}>Edit input label</p>
-              <input
-                className={"block__input"}
-                defaultValue={btn.label}
-                onChange={(e) =>
-                  handleInputChangeRadio(e, index, index1, index2)
-                }
-                name={"label"}
-              />
-            </div>
-            <div className={"group__input__block"}>
-              <p className={"block__p"}>Edit input value</p>
-              <input
-                className={"block__input"}
-                defaultValue={btn.value}
-                onChange={(e) =>
-                  handleInputChangeRadio(e, index, index1, index2)
-                }
-                name={"value"}
-              />
-            </div>
-            <div className={"group__input__block"}>
-              <p className={"block__p"}>Edit input name</p>
-              <input
-                className={"block__input"}
-                defaultValue={btn.name}
-                onChange={(e) =>
-                  handleInputChangeRadio(e, index, index1, index2)
-                }
-                name={"name"}
-              />
-            </div>
+            <EditItem
+              content={"Edit input label"}
+              value={btn.label}
+              onChange={(e) => handleInputChangeRadio(e, index, index1, index2)}
+              name={"label"}
+              onSave={save}
+            />
+
+            <EditItem
+              content={"Edit input value"}
+              value={btn.value}
+              onChange={(e) => handleInputChangeRadio(e, index, index1, index2)}
+              name={"value"}
+              onSave={save}
+            />
+
+            <EditItem
+              content={"Edit input name"}
+              name={"name"}
+              onSave={save}
+              onChange={(e) => handleInputChangeRadio(e, index, index1, index2)}
+              value={btn.name}
+            />
           </div>
         );
       })}
+
       <div className={"add__block"}>
         <img
           className={"add__block__plus"}

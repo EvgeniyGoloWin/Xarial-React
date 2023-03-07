@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
-import { Button } from "../../components";
+import { Button, Loader } from "../../components";
 import EditInput from "./editInput/editInput";
 import EditInputsRadio from "./editInputRadio/editInputsRadio";
 import { baseUrl } from "../../constants/api";
@@ -9,6 +9,7 @@ import { baseUrl } from "../../constants/api";
 import plus from "../../assets/icons/add.svg";
 
 import "./editFrom.css";
+import saveImg from "../../assets/icons/ok.png";
 
 export const EditForm = () => {
   const [state, setState] = useState([]);
@@ -21,6 +22,15 @@ export const EditForm = () => {
       setLoading(false);
     }, 1500);
   }, []);
+
+  const formRef = useRef();
+
+  console.log(formRef.current, "ref");
+  console.log(state, "state");
+
+  const handleChangeInputInBlock = () => {
+    setState((prev) => formRef.current);
+  };
 
   const handleChangeInput = (e, a, b) => {
     e.stopPropagation();
@@ -49,7 +59,7 @@ export const EditForm = () => {
       }
     });
 
-    setState((prev) => ({ ...prev, body: newBody }));
+    formRef.current = { ...state, body: newBody };
   };
 
   const handleChangeInputTitle = (e, a, b) => {
@@ -73,8 +83,59 @@ export const EditForm = () => {
         return item;
       }
     });
+    formRef.current = { ...state, body: newBody };
+  };
 
-    setState((prev) => ({ ...prev, body: newBody }));
+  const handleChangeSubtitle = (e, a) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const newForm = { ...state.body[a], subtitle: e.target.value };
+
+    const newBody = state.body.map((item, index) => {
+      if (index === a) {
+        return newForm;
+      } else {
+        return item;
+      }
+    });
+
+    formRef.current = { ...state, body: newBody };
+  };
+
+  const handleInputChangeRadio = (e, a, b, c) => {
+    const element = {
+      ...state.body[a].form[b].elements[c],
+      [e.target.name]: e.target.value,
+    };
+
+    const elements = state.body[a].form[b].elements.map((el, index) => {
+      if (index === c) {
+        return element;
+      } else {
+        return el;
+      }
+    });
+
+    const formEl = { ...state.body[a].form[b], elements };
+
+    const newForm = state.body[a].form.map((item, index) => {
+      if (index === b) {
+        return formEl;
+      } else {
+        return item;
+      }
+    });
+
+    const newBody = state.body.map((item, index) => {
+      if (index === a) {
+        return { ...item, form: newForm };
+      } else {
+        return item;
+      }
+    });
+
+    formRef.current = { ...state, body: newBody };
   };
 
   const addRadioButton = (a, b) => {
@@ -159,41 +220,6 @@ export const EditForm = () => {
     setState((prev) => ({ ...prev, body: newBody }));
   };
 
-  const handleInputChangeRadio = (e, a, b, c) => {
-    const element = {
-      ...state.body[a].form[b].elements[c],
-      [e.target.name]: e.target.value,
-    };
-
-    const elements = state.body[a].form[b].elements.map((el, index) => {
-      if (index === c) {
-        return element;
-      } else {
-        return el;
-      }
-    });
-
-    const formEl = { ...state.body[a].form[b], elements };
-
-    const newForm = state.body[a].form.map((item, index) => {
-      if (index === b) {
-        return formEl;
-      } else {
-        return item;
-      }
-    });
-
-    const newBody = state.body.map((item, index) => {
-      if (index === a) {
-        return { ...item, form: newForm };
-      } else {
-        return item;
-      }
-    });
-
-    setState((prevState) => ({ ...prevState, body: newBody }));
-  };
-
   const removeInput = (a, b) => {
     const newFrom = state.body[a].form.filter((_, i) => i !== b);
 
@@ -237,7 +263,7 @@ export const EditForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`http://localhost:8080/form`, {
+    const res = await fetch(`${baseUrl}/form`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(state),
@@ -253,7 +279,7 @@ export const EditForm = () => {
   };
 
   return loading ? (
-    <p>data is loading</p>
+    <Loader />
   ) : (
     <div className={"page"}>
       <form className="edit__form" onSubmit={(e) => handleSubmit(e)}>
@@ -262,9 +288,25 @@ export const EditForm = () => {
         </div>
         {state?.body?.map((data, formIndex) => {
           return (
-            <div key={index} className="form__body">
+            <div key={formIndex} className="form__body">
               {data.subtitle !== undefined && (
-                <h3 className={"subheader"}>{data?.subtitle}</h3>
+                <>
+                  <h3 className={"subheader"}>{data?.subtitle}</h3>
+                  <div className={"add__block"}>
+                    <input
+                      className={"block__input"}
+                      defaultValue={data?.subtitle}
+                      onChange={(e) => handleChangeSubtitle(e, formIndex)}
+                      name={"subtitle"}
+                    />
+                    <img
+                      className={"save_icon"}
+                      src={saveImg}
+                      alt={"save"}
+                      onClick={handleChangeInputInBlock}
+                    />
+                  </div>
+                </>
               )}
               {data.form.map((item, formItemIndex) => {
                 return item.element ? (
@@ -275,6 +317,7 @@ export const EditForm = () => {
                     onChangeInput={(e) =>
                       handleChangeInput(e, formIndex, formItemIndex)
                     }
+                    save={handleChangeInputInBlock}
                   />
                 ) : (
                   <EditInputsRadio
@@ -287,6 +330,7 @@ export const EditForm = () => {
                     handleInputChangeRadio={handleInputChangeRadio}
                     removeRadioButton={removeRadioButton}
                     removeInput={removeInput}
+                    save={handleChangeInputInBlock}
                   />
                 );
               })}
